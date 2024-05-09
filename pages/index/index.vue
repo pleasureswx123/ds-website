@@ -20,11 +20,7 @@
   </section>
 </template>
 
-<script setup>
-definePageMeta({
-  title: "首页",
-});
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .panel {

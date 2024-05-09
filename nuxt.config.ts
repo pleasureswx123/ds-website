@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   //   host: "localhost",
   // },
   debug: !!isDev,
+  extends: ["@nuxt/ui-pro"],
   modules: [
     "@nuxt/ui",
     "@vueuse/nuxt",
