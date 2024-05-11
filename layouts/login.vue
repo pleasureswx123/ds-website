@@ -5,9 +5,7 @@
       <PageHeader></PageHeader>
     </template>
     <div class="flex-1 w-full min-w-0">
-      <div class="max-w-screen-xl mx-auto p-4 min-h-full">
-        <slot />
-      </div>
+      <slot />
     </div>
     <template #footer>
       <PageFooter></PageFooter>

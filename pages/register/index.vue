@@ -1,103 +1,52 @@
 <template>
   <div class="login-container">
     <el-card class="m-auto" style="max-width: 500px">
-      <el-form
-        ref="ruleFormRef"
-        style="max-width: 600px"
-        :model="params"
-        label-position="top"
-        :rules="rules"
-        label-width="auto"
-        class="demo-ruleForm"
-        size="large"
-        require-asterisk-position="left"
-        :hide-required-asterisk="true"
-        :scroll-to-error="true"
-      >
+      <el-form ref="ruleFormRef" style="max-width: 600px" :model="params" label-position="top" :rules="rules"
+        label-width="auto" class="demo-ruleForm" size="large" require-asterisk-position="left"
+        :hide-required-asterisk="true" :scroll-to-error="true">
         <el-form-item prop="username">
           <el-input v-model="params.username" placeholder="账号">
             <template #prefix>
-              <Icon
-                name="fluent:person-circle-20-filled"
-                color="#a2a2a2"
-                size="25"
-              />
+              <Icon name="fluent:person-circle-20-filled" color="#a2a2a2" size="25" />
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input
-            v-model="params.password"
-            :type="eyeStatus ? 'text' : 'password'"
-            autocomplete="off"
-            placeholder="密码"
-          >
+          <el-input v-model="params.password" :type="eyeStatus ? 'text' : 'password'" autocomplete="off"
+            placeholder="密码">
             <template #prefix>
-              <Icon
-                name="fluent:lock-closed-20-filled"
-                color="#a2a2a2"
-                size="25"
-              />
+              <Icon name="fluent:lock-closed-20-filled" color="#a2a2a2" size="25" />
             </template>
             <template #suffix>
               <span class="cursor-pointer" @click="eyeStatus = !eyeStatus">
-                <Icon
-                  v-if="!eyeStatus"
-                  name="el:eye-close"
-                  color="#a2a2a2"
-                  size="20"
-                />
+                <Icon v-if="!eyeStatus" name="el:eye-close" color="#a2a2a2" size="20" />
                 <Icon v-else name="el:eye-open" color="#a2a2a2" size="20" />
               </span>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="confirmPassword">
-          <el-input
-            v-model="params.confirmPassword"
-            :type="confirmEyeStatus ? 'text' : 'password'"
-            autocomplete="off"
-            placeholder="确认密码"
-          >
+          <el-input v-model="params.confirmPassword" :type="confirmEyeStatus ? 'text' : 'password'" autocomplete="off"
+            placeholder="确认密码">
             <template #prefix>
-              <Icon
-                name="fluent:lock-closed-20-filled"
-                color="#a2a2a2"
-                size="25"
-              />
+              <Icon name="fluent:lock-closed-20-filled" color="#a2a2a2" size="25" />
             </template>
             <template #suffix>
-              <span
-                class="cursor-pointer"
-                @click="confirmEyeStatus = !confirmEyeStatus"
-              >
-                <Icon
-                  v-if="!confirmEyeStatus"
-                  name="el:eye-close"
-                  color="#a2a2a2"
-                  size="20"
-                />
+              <span class="cursor-pointer" @click="confirmEyeStatus = !confirmEyeStatus">
+                <Icon v-if="!confirmEyeStatus" name="el:eye-close" color="#a2a2a2" size="20" />
                 <Icon v-else name="el:eye-open" color="#a2a2a2" size="20" />
               </span>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="code">
-          <el-input
-            class="code-input-box"
-            v-model="params.code"
-            placeholder="验证码"
-          >
+          <el-input class="code-input-box" v-model="params.code" placeholder="验证码">
             <template #prefix>
               <Icon name="fluent:password-20-filled" color="a2a2a2" size="25" />
             </template>
             <template #append>
-              <el-image
-                @click="getCaptchaImageSrc"
-                class="w-[100px] border cursor-pointer"
-                :src="captchaImageSrc"
-                fit="fill"
-              />
+              <el-image @click="getCaptchaImageSrc" class="w-[100px] border cursor-pointer" :src="captchaImageSrc"
+                fit="fill" />
             </template>
           </el-input>
         </el-form-item>
@@ -110,6 +59,11 @@
 
 <script setup>
 import { useDebounceFn } from '@vueuse/core';
+
+definePageMeta({
+  layout: 'login'
+})
+
 const ruleFormRef = ref();
 const eyeStatus = ref(false);
 const confirmEyeStatus = ref(false);
@@ -209,7 +163,7 @@ const handleRegister = async (params) => {
       .then(() => {
         navigateTo("/login");
       })
-      .catch(() => {});
+      .catch(() => { });
   } else {
     ElMessage({
       message: msg,
@@ -225,11 +179,13 @@ const handleRegister = async (params) => {
 .login-container {
   background: url("~/assets/images/temp_login2.jpeg") no-repeat center center;
   background-size: cover;
-  @apply h-[55vh] py-10 -m-3 flex items-center justify-center;
+  @apply min-h-full flex items-center justify-center;
 }
+
 .login-box {
   @apply bg-white w-[500px] p-10 rounded-lg shadow-lg;
 }
+
 :deep(.code-input-box) {
   .el-input-group__append {
     padding: 0;

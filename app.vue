@@ -1,13 +1,27 @@
+<template>
+  <NuxtLoadingIndicator />
+
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+
+  <UModals />
+  <UNotifications />
+</template>
+
 <script setup>
 const colorMode = useColorMode();
 
-const color = computed(() =>
-  colorMode.value === "dark" ? "#111827" : "white"
-);
+const color = computed(() => {
+  return colorMode.value === "dark" ? "#111827" : "white";
+});
 
 const isDev = process.env.NODE_ENV === "development";
 
 useHead({
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `${titleChunk} - 职工文体赛事" : ` : "职工文体赛事";
+  },
   meta: [
     { charset: "utf-8" },
     {
@@ -37,13 +51,7 @@ useHead({
   link: [{ rel: "icon", href: "/favicon.ico" }],
   htmlAttrs: {
     lang: "en",
-  },
-});
-
-useSeoMeta({
-  // ogImage: "https://saas-template.nuxt.dev/social-card.png",
-  // twitterImage: "https://saas-template.nuxt.dev/social-card.png",
-  // twitterCard: "summary_large_image",
+  }
 });
 
 const title = "职工文体赛事";
@@ -60,25 +68,3 @@ useSeoMeta({
   // twitterCard: 'summary_large_image'
 });
 </script>
-
-<template>
-  <div>
-    <NuxtLoadingIndicator />
-
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-
-    <UNotifications />
-    <UModals />
-  </div>
-</template>
-
-<style lang="scss">
-:root {
-  --el-color-primary: rgba(255, 0, 0, 1) !important;
-  --el-color-primary-light-3: rgba(255, 0, 0, 0.8) !important;
-  --el-color-primary-light-9: rgba(255, 0, 0, 0.09) !important;
-  --el-color-primary-light-7: rgba(255, 0, 0, 0.07) !important;
-}
-</style>

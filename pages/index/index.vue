@@ -20,7 +20,11 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+useHead(() => ({
+  title: "首页",
+}));
+</script>
 
 <style lang="scss" scoped>
 .panel {

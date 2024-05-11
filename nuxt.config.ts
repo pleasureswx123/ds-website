@@ -8,15 +8,13 @@ export default defineNuxtConfig({
   //   host: "localhost",
   // },
   debug: !!isDev,
-  extends: ["@nuxt/ui-pro"],
   modules: [
-    "@nuxt/ui",
     "@vueuse/nuxt",
     "@element-plus/nuxt",
     "@pinia/nuxt",
+    "@nuxt/ui",
     "nuxt-icon",
   ],
-  css: ["~/assets/scss/index.scss"],
   ui: {
     icons: ["heroicons", "simple-icons"],
     // safelistColors: ["primary", "red", "orange", "green"],
@@ -32,24 +30,24 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ["./stores/**"],
   },
-  routeRules: {
-    // "/docs": { redirect: "/docs/getting-started", prerender: false },
-  },
-  typescript: {
-    strict: false,
-  },
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@use "@/assets/scss/element/index.scss" as element;`,
-        },
-      },
-    },
-  },
-  elementPlus: {
-    icon: "ElIcon",
-    importStyle: "scss",
-    themes: ["dark"],
-  },
+  // routeRules: {
+  //   "/docs": { redirect: "/docs/getting-started", prerender: false },
+  // },
+  // typescript: {
+  //   strict: false,
+  // },
+  // vite: {
+  //   css: {
+  //     preprocessorOptions: {
+  //       scss: {
+  //         additionalData: `@use "~/assets/scss/element/index.scss" as element;`,
+  //       },
+  //     },
+  //   },
+  // },
+  // elementPlus: {
+  //   icon: "ElIcon",
+  //   importStyle: "scss",
+  //   themes: ["dark"],
+  // },
 });
