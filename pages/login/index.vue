@@ -147,7 +147,7 @@ const submitForm = async () => {
 .login-container {
   background: url("~/assets/images/temp_login2.jpeg") no-repeat center center;
   background-size: cover;
-  @apply min-h-full flex items-center justify-center;
+  @apply min-h-full flex items-center justify-center py-4;
 }
 
 .login-box {

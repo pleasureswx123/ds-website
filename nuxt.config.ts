@@ -19,14 +19,6 @@ export default defineNuxtConfig({
     icons: ["heroicons", "simple-icons"],
     // safelistColors: ["primary", "red", "orange", "green"],
   },
-  icon: {
-    customCollections: [
-      {
-        prefix: "my-icon",
-        dir: "./assets/svg",
-      },
-    ],
-  },
   pinia: {
     storesDirs: ["./stores/**"],
   },

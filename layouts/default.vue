@@ -1,16 +1,11 @@
 <template>
-  <UCard
-    :ui="{ base: 'flex flex-col min-h-screen', header: { padding: '!p-0' }, body: { base: 'flex-1 items-stretch flex !p-0' }, footer: { padding: '!p-0' } }">
-    <template #header>
-      <PageHeader></PageHeader>
-    </template>
-    <div class="flex-1 w-full min-w-0">
-      <div class="max-w-screen-xl mx-auto p-4 min-h-full">
+  <div class="flex flex-col min-h-screen">
+    <PageHeader></PageHeader>
+    <div class="flex-1 w-full min-w-0 min-h-0 items-stretch flex">
+      <div class="w-full max-w-screen-xl mx-auto py-4 space-y-4">
         <slot />
       </div>
     </div>
-    <template #footer>
-      <PageFooter></PageFooter>
-    </template>
-  </UCard>
+    <PageFooter></PageFooter>
+  </div>
 </template>

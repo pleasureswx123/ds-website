@@ -36,7 +36,7 @@
           <template #account="{ item }">
             <div class="text-left">
               <p>{{ userInfo.email }}</p>
-              <p>{{ userInfo.phonenumber }}</p>
+              <p>{{ userInfo.phoneNumber }}</p>
               <p class="truncate font-medium text-gray-900 dark:text-white">
                 userId: {{ userInfo.userId }}
               </p>

@@ -1,23 +1,110 @@
 <template>
-  <section class="panel !h-[100px]">
-    <div>广告位</div>
-  </section>
+  <div class="grid grid-cols-3 gap-3">
 
-  <section class="panel">
-    <div>赛事播报</div>
-  </section>
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <div>11</div>
+    </UCard>
 
-  <section class="panel !h-[100px]">
-    <div>广告位</div>
-  </section>
+    <div class="space-y-3 flex flex-col">
+      <UCard :ui="{ base: 'flex-1', rounded: 'rounded-none' }">
+        <div>111</div>
+      </UCard>
+      <div class="grid grid-cols-2 gap-3">
+        <UCard :ui="{ rounded: 'rounded-none' }">
+          <div class="h-12">333</div>
+        </UCard>
+        <UCard :ui="{ rounded: 'rounded-none' }">
+          <div class="h-12">444</div>
+        </UCard>
+      </div>
+    </div>
 
-  <section class="panel">
-    <div>历届赛事</div>
-  </section>
+    <div class="space-y-3 flex flex-col">
+      <UCard :ui="{ base: 'flex-1', rounded: 'rounded-none' }">
+        <template #header>
+          <div>标题</div>
+        </template>
+        <div class="bg-blue-400 h-32">66</div>
+      </UCard>
+      <div class="grid grid-cols-2 gap-3">
+        <UCard :ui="{ rounded: 'rounded-none' }">
+          <div class="h-12"></div>
+        </UCard>
+        <UCard :ui="{ rounded: 'rounded-none' }">
+          <div class="h-12"></div>
+        </UCard>
+      </div>
+    </div>
 
-  <section class="panel">
-    <div>合作单位</div>
-  </section>
+  </div>
+
+  <UCard :ui="{ base: 'flex-1', rounded: 'rounded-none' }">
+    <div class="h-16">66</div>
+  </UCard>
+
+
+  <div class="grid grid-cols-3 gap-3">
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <template #header>
+        <div>标题</div>
+      </template>
+      <div class="h-40">11</div>
+    </UCard>
+
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <template #header>
+        <div>标题</div>
+      </template>
+      <div>11</div>
+    </UCard>
+
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <template #header>
+        <div>标题</div>
+      </template>
+      <div>11</div>
+    </UCard>
+
+  </div>
+
+  <UCard :ui="{ base: 'flex-1', rounded: 'rounded-none' }">
+    <div class="h-16">66</div>
+  </UCard>
+
+  <div class="grid grid-cols-2 gap-3">
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <div class="h-40">11</div>
+    </UCard>
+
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <div>11</div>
+    </UCard>
+
+  </div>
+
+  <div class="grid grid-cols-4 gap-3">
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <div class="h-40">11</div>
+    </UCard>
+
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <div>11</div>
+    </UCard>
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <div class="h-40">11</div>
+    </UCard>
+
+    <UCard :ui="{ rounded: 'rounded-none' }">
+      <div>11</div>
+    </UCard>
+
+  </div>
+
+
+
+
+
+
 </template>
 
 <script setup>
