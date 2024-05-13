@@ -9,18 +9,25 @@
       <TopMenu />
     </div>
   </div>
+  <!-- <div class="bg-red-600 border-t border-red-600 sticky top-0 z-10 mt-1">
+    <div class="max-w-screen-xl mx-auto">
+      <TopNavMenu />
+    </div>
+  </div> -->
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
+.red1 {
+  background-color: red;
+}
 .page-header {
   background: url(~/assets/images/header-bg.png) repeat-x center;
   @apply bg-cover;
 
   .logo {
-    @apply block m-auto w-[90%] h-auto object-contain sm:w-[640px] md:w-[768px]
+    @apply block m-auto w-[90%] h-auto object-contain sm:w-[640px] md:w-[768px];
   }
 }
 </style>

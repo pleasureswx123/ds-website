@@ -68,3 +68,14 @@ useSeoMeta({
   // twitterCard: 'summary_large_image'
 });
 </script>
+
+<style lang="scss">
+:root {
+  --el-color-primary: red !important;
+  --el-color-success: #67c23a;
+  --el-color-warning: #e6a23c;
+  --el-color-danger: #f56c6c;
+  --el-color-error: #f56c6c;
+  --el-color-info: #909399;
+}
+</style>

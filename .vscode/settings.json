@@ -1,27 +1,36 @@
 {
-  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "ui"],
-  "editor.inlineSuggest.enabled": true,
   "css.validate": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "tailwindCSS.files.exclude": [
-    "**/.git/**",
-    "**/node_modules/**",
-    "**/.hg/**",
-    "**/.svn/**",
-    "**/.nuxt/**"
-  ],
-
-  "tailwindCSS.experimental.classRegex": [
-    "tw`(.*?)`",
-    "tw\\('(.*?)'\\)",
-    "tw\\(\\s*('(.*?)'|\"(.*?)\")\\s*\\)"
-  ],
-  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs",
+  "scss.lint.unknownAtRules": "ignore",
   "files.associations": {
     "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "editor.colorDecorators": true,
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "ui"],
+  // "tailwindCSS.experimental.classRegex": [
+  //   "tw`(.*?)`",
+  //   "tw\\('(.*?)'\\)",
+  //   "tw\\(\\s*('(.*?)'|\"(.*?)\")\\s*\\)"
+  // ],
+  // "tailwindCSS.includeLanguages": {
+  //   "javascript": "javascript",
+  //   "html": "html",
+  //   "plaintext": "html",
+  //   "vue-html": "html",
+  //   "razor": "html"
+  // },
+  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs"
+
+  // "editor.inlineSuggest.enabled": true,
+  // "editor.formatOnSave": true,
+  // "tailwindCSS.files.exclude": [
+  //   "**/.git/**",
+  //   "**/node_modules/**",
+  //   "**/.hg/**",
+  //   "**/.svn/**",
+  //   "**/.nuxt/**"
+  // ],
 }
