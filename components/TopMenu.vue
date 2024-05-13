@@ -200,4 +200,33 @@ const menuList = [
     to: '/about'
   },
 ];
+
+const breadcrumbData = useBreadcrumbList();
+
+const getBreadcrumbList = (array, path) => {
+  const root = array.find(item => item.to === '/');
+  const findInfo = (array, home) => {
+    return array.reduce((pre, item) => {
+      let result = [...pre];
+      if (item.to !== '/' && path.startsWith(item.to)) {
+        const { children, ...info } = item;
+        result.push(info);
+        if (children?.length) {
+          result.push(...findInfo(children.flat(), []))
+        }
+      }
+      return result;
+    }, home)
+  }
+  return findInfo(array, root ? [root] : [])
+}
+
+watch(() => route.path, (path) => {
+  breadcrumbData.value = getBreadcrumbList(menuList, path)
+})
+
+
+
+
+
 </script>

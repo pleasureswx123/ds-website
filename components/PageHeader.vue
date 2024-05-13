@@ -4,9 +4,16 @@
       <img class="logo" src="~/assets/images/logo.png" />
     </div>
   </div>
-  <div class="bg-red-600 border-t border-red-600 sticky top-0 z-10">
-    <div class="max-w-screen-xl mx-auto">
-      <TopMenu />
+  <div class="sticky top-0 z-10">
+    <div class="bg-red-600 border-t border-red-600">
+      <div class="max-w-screen-xl mx-auto">
+        <TopMenu />
+      </div>
+    </div>
+    <div class="bg-stone-100">
+      <div class="max-w-screen-xl mx-auto">
+        <BreadcrumbBar />
+      </div>
     </div>
   </div>
   <!-- <div class="bg-red-600 border-t border-red-600 sticky top-0 z-10 mt-1">
@@ -16,7 +23,8 @@
   </div> -->
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style lang="scss" scoped>
 .red1 {
