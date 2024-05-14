@@ -185,45 +185,45 @@ const menuList = [
   {
     label: '我要参赛',
     to: '/join',
-    children: [
-      [{
-        label: '篮球赛事项目',
-        to: '/join/1',
-        click: () => {
-          console.log('Edit')
-        }
-      }], [{
-        label: '乒乓球赛事项目',
-        to: '/join/2',
-        click: () => {
-          console.log('Edit')
-        }
-      }], [{
-        label: '羽毛球赛事项目',
-        to: '/join/3',
-        click: () => {
-          console.log('Edit')
-        }
-      }], [{
-        label: '足球赛事项目',
-        to: '/join/4',
-        click: () => {
-          console.log('Edit')
-        }
-      }], [{
-        label: '书画赛事项目',
-        to: '/join/5',
-        click: () => {
-          console.log('Edit')
-        }
-      }, {
-        label: '田径赛事项目',
-        to: '/join/5',
-        click: () => {
-          console.log('Edit')
-        }
-      }]
-    ]
+    // children: [
+    //   [{
+    //     label: '篮球赛事项目',
+    //     to: '/join/1',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }], [{
+    //     label: '乒乓球赛事项目',
+    //     to: '/join/2',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }], [{
+    //     label: '羽毛球赛事项目',
+    //     to: '/join/3',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }], [{
+    //     label: '足球赛事项目',
+    //     to: '/join/4',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }], [{
+    //     label: '书画赛事项目',
+    //     to: '/join/5',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }, {
+    //     label: '田径赛事项目',
+    //     to: '/join/5',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }]
+    // ]
   },
   {
     label: '通知公告',
