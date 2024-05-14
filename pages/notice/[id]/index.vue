@@ -1,11 +1,33 @@
 <template>
-  <div>通知公告类型id是 {{ $route.params.id }}</div>
+  <div v-if="content">
+    <div class="text-center text-2xl font-bold mt-10">{{ content.notificationName }}</div>
+    <div class="text-center text-sm text-gray-500 mt-3">日期：{{ content.createTime }}</div>
+    <div class="mt-5 pl-10 pr-10 " v-html="content.content"></div>
+  </div>
 </template>
-
 <script setup>
-definePageMeta({
-  layout: 'notice'
+const token = useCookie("token");
+const curToken = computed(() => {
+  return token.value;
 });
+
+const content = ref(null);
+const route = useRoute();
+const getDetail = async () => {
+  const result = await $fetch(
+    `https://sports.d.yanlingxinrui.com/app/v1/system/notification/${route.params.id}`,
+    { method: "GET",
+    headers: {
+        Authorization: `Bearer ${curToken.value}`,
+      },
+    },
+  );
+  const { code, msg, token: newToken, data } = result;
+  if (code === 200) {
+    content.value = data;
+  }
+}
+
+getDetail()
 </script>
 
-<style lang="scss" scoped></style>

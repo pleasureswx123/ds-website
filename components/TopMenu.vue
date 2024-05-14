@@ -139,49 +139,49 @@ const menuList = [
     icon: 'i-heroicons-home',
     to: '/'
   },
-  {
-    label: '比赛分类',
-    to: '/race',
-    children: [
-      [{
-        label: '篮球赛事项目',
-        to: '/race/1',
-        click: () => {
-          console.log('Edit')
-        }
-      }],[ {
-        label: '乒乓球赛事项目',
-          to: '/race/2',
-          click: () => {
-            console.log('Edit')
-          }
-      }], [{
-        label: '羽毛球赛事项目',
-          to: '/race/3',
-          click: () => {
-            console.log('Edit')
-          }
-      }], [{
-        label: '足球赛事项目',
-          to: '/race/4',
-          click: () => {
-            console.log('Edit')
-          }
-      }], [{
-        label: '书画赛事项目',
-          to: '/race/5',
-          click: () => {
-            console.log('Edit')
-          }
-      }, {
-          label: '田径赛事项目',
-          to: '/race/5',
-          click: () => {
-            console.log('Edit')
-          }
-        }]
-      ]
-  },
+  // {
+  //   label: '比赛分类',
+  //   to: '/race',
+  //   children: [
+  //     [{
+  //       label: '篮球赛事项目',
+  //       to: '/race/1',
+  //       click: () => {
+  //         console.log('Edit')
+  //       }
+  //     }],[ {
+  //       label: '乒乓球赛事项目',
+  //         to: '/race/2',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }], [{
+  //       label: '羽毛球赛事项目',
+  //         to: '/race/3',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }], [{
+  //       label: '足球赛事项目',
+  //         to: '/race/4',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }], [{
+  //       label: '书画赛事项目',
+  //         to: '/race/5',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }, {
+  //         label: '田径赛事项目',
+  //         to: '/race/5',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //       }]
+  //     ]
+  // },
   {
     label: '我要参赛',
     to: '/join',
@@ -228,49 +228,49 @@ const menuList = [
   {
     label: '通知公告',
     to: '/notice',
-    children: [
-      [{
-        label: '公告',
-        to: '/notice/1',
-        click: () => {
-          console.log('Edit')
-        }
-      }], [{
-        label: '公示',
-        to: '/notice/2',
-        click: () => {
-          console.log('Edit')
-        }
-      }]
-    ]
+    // children: [
+    //   [{
+    //     label: '公告',
+    //     to: '/notice/1',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }], [{
+    //     label: '公示',
+    //     to: '/notice/2',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }]
+    // ]
   },
   {
     label: '赛事播报',
     to: '/broadcast',
-    children: [
-      [{
-        label: '赛事项目1',
-        to: '/broadcast/1',
-        click: () => {
-          console.log('Edit')
-        }
-      }], [{
-        label: '球赛事项目2',
-        to: '/broadcast/2',
-        click: () => {
-          console.log('Edit')
-        }
-      }]
-    ]
+    // children: [
+    //   [{
+    //     label: '赛事项目1',
+    //     to: '/broadcast/1',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }], [{
+    //     label: '球赛事项目2',
+    //     to: '/broadcast/2',
+    //     click: () => {
+    //       console.log('Edit')
+    //     }
+    //   }]
+    // ]
   },
   {
     label: '历届赛事',
     to: '/history'
   },
-  {
-    label: '成绩查询',
-    to: '/scores'
-  },
+  // {
+  //   label: '成绩查询',
+  //   to: '/scores'
+  // },
   {
     label: '关于大赛',
     to: '/about'
