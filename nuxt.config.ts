@@ -8,6 +8,9 @@ export default defineNuxtConfig({
   //   host: "localhost",
   // },
   debug: !!isDev,
+  experimental: {
+    renderJsonPayloads: false
+  },
   modules: [
     "@vueuse/nuxt",
     "@element-plus/nuxt",

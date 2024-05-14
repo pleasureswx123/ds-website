@@ -5,7 +5,7 @@
       rounded: 'rounded-none', 
       body: { 
         background: 'bg-orange-50',
-        padding: '!px-4 !py-1'
+        padding: '!px-4 !py-2 !pb-3'
        }, 
       header: { 
         background: 'bg-red-600',

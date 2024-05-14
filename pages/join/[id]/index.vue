@@ -1,13 +1,11 @@
 <template>
-  <div>我要参赛赛事项目首页</div>
+  <div>我要报名的赛事项目id: {{ $route.params.id }}</div>
 </template>
 
 <script setup>
 definePageMeta({
   layout: 'join'
-})
-
-const breadcrumbData = useBreadcrumbList();
+});
 </script>
 
 <style lang="scss" scoped></style>

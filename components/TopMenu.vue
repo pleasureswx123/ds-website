@@ -132,6 +132,7 @@ const handleClick = (item) => {
   }
 }
 
+
 const menuList = [
   {
     label: '首页',
@@ -143,31 +144,37 @@ const menuList = [
     to: '/race',
     children: [
       [{
-        label: '项目1',
+        label: '篮球赛事项目',
         to: '/race/1',
         click: () => {
           console.log('Edit')
         }
       }],[ {
-          label: '项目1',
+        label: '乒乓球赛事项目',
           to: '/race/2',
           click: () => {
             console.log('Edit')
           }
       }], [{
-          label: '项目1',
+        label: '羽毛球赛事项目',
           to: '/race/3',
           click: () => {
             console.log('Edit')
           }
       }], [{
-          label: '项目1',
+        label: '足球赛事项目',
           to: '/race/4',
           click: () => {
             console.log('Edit')
           }
       }], [{
-          label: '项目1',
+        label: '书画赛事项目',
+          to: '/race/5',
+          click: () => {
+            console.log('Edit')
+          }
+      }, {
+          label: '田径赛事项目',
           to: '/race/5',
           click: () => {
             console.log('Edit')
@@ -177,15 +184,84 @@ const menuList = [
   },
   {
     label: '我要参赛',
-    to: '/join'
+    to: '/join',
+    children: [
+      [{
+        label: '篮球赛事项目',
+        to: '/join/1',
+        click: () => {
+          console.log('Edit')
+        }
+      }], [{
+        label: '乒乓球赛事项目',
+        to: '/join/2',
+        click: () => {
+          console.log('Edit')
+        }
+      }], [{
+        label: '羽毛球赛事项目',
+        to: '/join/3',
+        click: () => {
+          console.log('Edit')
+        }
+      }], [{
+        label: '足球赛事项目',
+        to: '/join/4',
+        click: () => {
+          console.log('Edit')
+        }
+      }], [{
+        label: '书画赛事项目',
+        to: '/join/5',
+        click: () => {
+          console.log('Edit')
+        }
+      }, {
+        label: '田径赛事项目',
+        to: '/join/5',
+        click: () => {
+          console.log('Edit')
+        }
+      }]
+    ]
   },
   {
     label: '通知公告',
-    to: '/notice'
+    to: '/notice',
+    children: [
+      [{
+        label: '公告',
+        to: '/notice/1',
+        click: () => {
+          console.log('Edit')
+        }
+      }], [{
+        label: '公示',
+        to: '/notice/2',
+        click: () => {
+          console.log('Edit')
+        }
+      }]
+    ]
   },
   {
     label: '赛事播报',
-    to: '/broadcast'
+    to: '/broadcast',
+    children: [
+      [{
+        label: '赛事项目1',
+        to: '/broadcast/1',
+        click: () => {
+          console.log('Edit')
+        }
+      }], [{
+        label: '球赛事项目2',
+        to: '/broadcast/2',
+        click: () => {
+          console.log('Edit')
+        }
+      }]
+    ]
   },
   {
     label: '历届赛事',
@@ -200,6 +276,20 @@ const menuList = [
     to: '/about'
   },
 ];
+
+const sidebarMenuList = useSidebarMenuList();
+const getSidebarMenuList = (path) => {
+  let res = [];
+  try {
+    res = menuList.filter(item => item.to !== '/').find(item => path.startsWith(item.to))?.children?.flat();
+  } catch (e) {
+    console.log(678, e)
+  }
+  return res;
+}
+watchEffect(() => {
+  sidebarMenuList.value = getSidebarMenuList(route.path)
+})
 
 const breadcrumbData = useBreadcrumbList();
 

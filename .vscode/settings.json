@@ -23,7 +23,10 @@
   //   "vue-html": "html",
   //   "razor": "html"
   // },
-  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs"
+  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs",
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  }
 
   // "editor.inlineSuggest.enabled": true,
   // "editor.formatOnSave": true,

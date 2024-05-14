@@ -1,10 +1,10 @@
 <template>
-    <div>比赛赛事类型项目id: {{ $route.params.id }}</div>
+  <div>通知公告类型id是 {{ $route.params.id }}</div>
 </template>
 
 <script setup>
 definePageMeta({
-    layout: 'race'
+  layout: 'notice'
 });
 </script>
 
