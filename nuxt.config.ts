@@ -11,6 +11,11 @@ export default defineNuxtConfig({
   experimental: {
     renderJsonPayloads: false
   },
+  runtimeConfig: {
+    "app": {
+      "cdnURL": isDev ? '' : "http://123.56.169.72"
+    },
+  },
   modules: [
     "@vueuse/nuxt",
     "@element-plus/nuxt",
