@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div class="flex flex-wrap">
-      <div class="w-72 border rounded m-2 flex-wrap relative" v-for="(item, index) in projectList" :key="index"
+      <div class="w-72 border rounded m-2 flex-wrap relative cursor-pointer" v-for="(item, index) in projectList" :key="index"
            @click="goDetail(item)">
         <el-image :src="baseApi+item.thumbnail" fit="cover" class="cursor-pointer h-64 w-full">
           <template #error>
