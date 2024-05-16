@@ -1,23 +1,23 @@
 <template>
-  <div class="flex gap-20">
-    <div class="flex-1 flex min-w-0">
+  <div class="flex flex-col md:flex-row md:gap-6">
+    <div class="md:grow flex flex-wrap md:flex-nowrap">
       <template v-for="(item, index) in menuList">
-        <div v-if="!item.children" class="group flex-1 min-w-0"
+        <div v-if="!item.children" class="group grow"
           :class="{ active: $route.path.length === 1 ? $route.path === item.to : item.to.startsWith($route.path) }">
           <div
-            class="text-center w-full truncate cursor-pointer text-white text-base font-bold h-10 leading-10 hover:bg-red-500 group-[.active]:bg-red-700"
+            class="text-center w-full truncate cursor-pointer text-white px-2 text-base font-bold h-10 leading-10 hover:bg-red-500 group-[.active]:bg-red-700"
             @click="handleClick(item)">
             <UAvatar v-if="item.to === '/'" :ui="{ wrapper: 'bg-white inline-block align-middle mr-3 -mt-1' }" size="sm"
               :src="LogoImg" alt="职工文体" />
             {{ item.label }}
           </div>
         </div>
-        <div class="group flex-1 min-w-0" v-else
+        <div class="group grow" v-else
           :class="{ active: $route.path.length === 1 ? $route.path === item.to : $route.path.startsWith(item.to) }">
           <UDropdown :items="item.children" mode="hover" :popper="{ offsetDistance: -10, placement: 'bottom-start' }"
             :ui="{ wrapper: 'w-full', rounded: 'rounded-none', item: { disabled: 'cursor-auto', inactive: 'text-white', active: 'bg-red-700 text-white' }, background: 'bg-red-600', ring: 'ring-red-500', divide: 'divide-red-500' }">
             <div
-              class="text-center w-full truncate cursor-pointer text-white text-base font-bold h-10 leading-10 hover:bg-red-500 group-[.active]:bg-red-700"
+              class="text-center w-full truncate cursor-pointer text-white px-2 text-base font-bold h-10 leading-10 hover:bg-red-500 group-[.active]:bg-red-700"
               @click="handleClick(item)">{{ item.label }}
               <UIcon class="-mt-1" name="i-heroicons-chevron-down-20-solid" />
             </div>
@@ -26,7 +26,7 @@
         </div>
       </template>
     </div>
-    <div class="flex items-center gap-3">
+    <div class="ml-auto shrink-0 flex items-center gap-3 pb-3 md:pb-0">
       <template v-if="!userInfo">
         <UButtonGroup size="2xs" orientation="horizontal">
           <UButton @click="handleClick({ to: '/login' })" icon="i-heroicons-user-circle" label="登录"

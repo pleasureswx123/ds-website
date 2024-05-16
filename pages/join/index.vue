@@ -8,7 +8,8 @@
           </template>
           <div class="divide-y divide-red-400 divide-dashed text-center">
             <div class="py-4 cursor-pointer hover:bg-orange-100 aria-selected:text-red-500 aria-selected:font-bold"
-              v-for="(item, index) in projectList" :key="index" @click="handleClick(item)">{{ item.projectName }}</div>
+            :aria-selected="projectId === item.projectId"
+              v-for="(item, index) in projectList" :key="index" @click="projectId = item.projectId">{{ item.projectName }}</div>
           </div>
         </CardArea>
       </template>
@@ -31,7 +32,7 @@
           <p class="font-bold truncate cursor-pointer" @click="goDetail(item)">{{ item.name }}</p>
           <p class="mt-2 text-sm text-gray-500">起至时间：{{ item.beginTime }}至{{ item.endTime }}</p>
         </div>
-        <div class="mt-1 mb-3 flex items-center justify-center cursor-pointer" @click="goSignUp(item)"><el-button
+        <div class="mt-1 mb-3 flex items-center justify-center cursor-pointer" @click="appStoreInfo.jumpPath(`/apply/${item.contestId}`)"><el-button
             type="danger" round>我要报名</el-button></div>
       </div>
     </div>
@@ -47,36 +48,30 @@
 import { Picture } from "@element-plus/icons-vue";
 import city from '@/utils/city.js';
 
-const { baseApi } = useAppConfig();
+const appStoreInfo = useAppStoreInfo();
+const baseApi = appStoreInfo.baseApi;
+const {projectList} = storeToRefs(appStoreInfo);
+appStoreInfo.getProjectList();
 
-const projectList = ref([]);
-const handleProList = async (params) => {
-  const result = await $fetch(`${baseApi}/system/project/list?pageNum=1&pageSize=10`);
-  const { code, rows } = result;
-  if (code === 200) {
-    projectList.value = rows;
-    handleClick(rows[0])
-  }
-}
-
-handleProList()
+const projectId = ref('');
+watch(projectList, (list) => {
+  projectId.value = list?.[0]?.projectId;
+})
+watch(projectId, (id) => {
+  console.log(876, id)
+  id && getContestList(id);
+})
 
 const contestList = ref([]);
-const handleClick = async (item) => {
-  const result = await $fetch(`${baseApi}/system/contest/list?pageNum=1&pageSize=10&projectId=${item.projectId}`);
-  const { code, rows } = result;
-  if (code === 200) {
+
+const getContestList = async (projectId) => {
+  appStoreInfo.getContestList({projectId}).then(rows => {
     contestList.value = rows;
-  }
+  })
 }
 
-const router = useRouter();
 const goDetail = (item) => {
-  router.push('/join/' + item.contestId);
-}
-
-const goSignUp = (item) => {
-  router.push(`/apply/${item.contestId}`);
+  appStoreInfo.jumpPath(`/join/${item.contestId}`)
 }
 </script>
 
