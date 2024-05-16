@@ -7,7 +7,8 @@ export default defineNuxtConfig({
   //   port: 3000,
   //   host: "localhost",
   // },
-  debug: !!isDev,
+  ssr: false,
+  // debug: !!isDev,
   experimental: {
     renderJsonPayloads: false
   },

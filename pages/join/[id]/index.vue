@@ -13,14 +13,17 @@ const curToken = computed(() => {
 
 const content = ref(null);
 const route = useRoute();
+
+const { baseApi } = useAppConfig();
 const getDetail = async () => {
   const result = await $fetch(
-    `https://sports.d.yanlingxinrui.com/app/v1/system/contest/${route.params.id}`,
-    { method: "GET",
-    headers: {
-        Authorization: `Bearer ${curToken.value}`,
-      },
-    },
+    `${baseApi}/system/contest/${route.params.id}`,
+    // {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: `Bearer ${curToken.value}`,
+    //   },
+    // },
   );
   const { code, msg, token: newToken, data } = result;
   if (code === 200) {
@@ -30,4 +33,3 @@ const getDetail = async () => {
 
 getDetail()
 </script>
-
