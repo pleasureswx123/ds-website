@@ -8,7 +8,8 @@
           </template>
           <div class="divide-y divide-red-400 divide-dashed text-center">
             <div class="py-4 cursor-pointer hover:bg-orange-100 aria-selected:text-red-500 aria-selected:font-bold"
-              v-for="(item, index) in projectList" :key="index" @click="handleClick(item)">{{ item.projectName }}</div>
+                 :aria-selected="projectId === item.projectId"
+              v-for="(item, index) in projectList" :key="index" @click="projectId = item.projectId">{{ item.projectName }}</div>
           </div>
         </CardArea>
       </template>
@@ -30,63 +31,29 @@
 </template>
 
 <script setup>
+const appStoreInfo = useAppStoreInfo();
+const {projectList} = storeToRefs(appStoreInfo);
+appStoreInfo.getProjectList();
 
-import  city  from '@/utils/city.js';
-// definePageMeta({
-//   layout: 'join'
-// })
-
-const VITE_APP_BASE_API = 'https://sports.d.yanlingxinrui.com/app/v1';
-const breadcrumbData = useBreadcrumbList();
-
-
-const token = useCookie("token");
-const curToken = computed(() => {
-  return token.value;
-});
-
-const projectList = ref([]);
-const handleProList = async (params) => {
-  const result = await $fetch(
-    "https://sports.d.yanlingxinrui.com/app/v1/system/project/list?pageNum=1&pageSize=10",
-    { method: "GET",
-    headers: {
-        Authorization: `Bearer ${curToken.value}`,
-      },
-    },
-  );
-  const { code, msg, token: newToken, rows } = result;
-  if (code === 200) {
-    projectList.value = rows;
-    handleClick(rows[0])
-  }
-}
-
-handleProList()
-
+const projectId = ref('');
+watch(projectList, (list) => {
+  projectId.value = list?.[0]?.projectId;
+})
+watch(projectId, (id) => {
+  id && getBroadcastList(id);
+})
 
 const broadcastList = ref([]);
-const handleClick = async (item)=>{
-  const result = await $fetch(
-    `https://sports.d.yanlingxinrui.com/app/v1/system/broadcast/list?pageNum=1&pageSize=10&projectId=${item.projectId}`,
-      { method: "GET",
-      headers: {
-          Authorization: `Bearer ${curToken.value}`,
-        },
-      },
-    );
-    const { code, msg, token: newToken, rows } = result;
-    if (code === 200) {
-      broadcastList.value = rows;
-    }
+
+const getBroadcastList = async (projectId) => {
+  appStoreInfo.getBroadcastList({projectId}).then(rows => {
+    broadcastList.value = rows;
+  })
 }
 
-const router = useRouter();
 const goDetail = (item) => {
-  router.push('/broadcast/'+item.broadcastId);
+  appStoreInfo.jumpPath(`/broadcast/${item.broadcastId}`)
 }
-
-
 </script>
 
 <style lang="scss" scoped></style>

@@ -36,8 +36,24 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
       return result?.rows;
     }
   }
+  const getNotificationList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
+    const result = await $fetch(`${baseApi}/system/notification/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
+      console.log(err);
+    });
+    if (result.code === 200) {
+      return result?.rows;
+    }
+  }
+  const getBroadcastList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
+    const result = await $fetch(`${baseApi}/system/broadcast/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
+      console.log(err);
+    });
+    if (result.code === 200) {
+      return result?.rows;
+    }
+  }
   const jumpPath = (path) => {
     path && router.push(path);
   }
-  return {jumpPath, baseApi, projectList, getProjectList, getContestList}
+  return {jumpPath, baseApi, projectList, getProjectList, getContestList, getNotificationList, getBroadcastList}
 })
