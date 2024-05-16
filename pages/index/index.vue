@@ -52,6 +52,10 @@
         </div>
       </div>
     </section>
+    
+    <div>
+      <img class="w-full h-32 object-cover m-auto" src="~/assets/images/banner-1.png" alt="">
+    </div>
 
 
     <section class="text-gray-600 body-font">
@@ -150,6 +154,11 @@
         </div>
       </div>
     </section>
+  
+  
+    <div>
+      <img class="w-full h-32 object-cover m-auto" src="~/assets/images/banner-3.png" alt="">
+    </div>
 
 
 
@@ -284,6 +293,9 @@
         </div>
       </div>
     </section>
+    
+<!--
+    
 
 
     <section class="text-gray-600 body-font">
@@ -482,7 +494,7 @@
         <button
           class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
       </div>
-    </section>
+    </section>-->
 
   </div>
 
@@ -492,7 +504,7 @@
 
 
 
-
+<!--
 
   <div class="grid grid-cols-3 gap-3">
 
@@ -597,6 +609,9 @@
     </UCard>
 
   </div>
+  
+  
+  -->
 </template>
 
 <script setup>
