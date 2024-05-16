@@ -6,28 +6,9 @@
   </div>
 </template>
 <script setup>
-const token = useCookie("token");
-const curToken = computed(() => {
-  return token.value;
-});
-
-const content = ref(null);
 const route = useRoute();
-const getDetail = async () => {
-  const result = await $fetch(
-    `https://sports.d.yanlingxinrui.com/app/v1/system/notification/${route.params.id}`,
-    { method: "GET",
-    headers: {
-        Authorization: `Bearer ${curToken.value}`,
-      },
-    },
-  );
-  const { code, msg, token: newToken, data } = result;
-  if (code === 200) {
-    content.value = data;
-  }
-}
-
-getDetail()
+const appStoreInfo = useAppStoreInfo();
+const {detailInfo: content} = storeToRefs(appStoreInfo);
+appStoreInfo.getNotificationDetail({id: route.params.id});
 </script>
 

@@ -28,15 +28,10 @@
 
 <script setup>
 import {Picture} from "@element-plus/icons-vue";
-
 const appStoreInfo = useAppStoreInfo();
 const baseApi = appStoreInfo.baseApi;
 const {projectList} = storeToRefs(appStoreInfo);
 appStoreInfo.getProjectList();
-const projectId = ref('');
-watch(projectList, (list) => {
-  projectId.value = list?.[0]?.projectId;
-})
 
 const goDetail = (item) => {
   appStoreInfo.jumpPath(`/about/${item.projectId}`)
