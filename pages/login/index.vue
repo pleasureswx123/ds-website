@@ -31,7 +31,7 @@
               <Icon name="fluent:password-20-filled" color="a2a2a2" size="25" />
             </template>
             <template #append>
-              <el-image @click="getCaptchaImageSrc" class="w-[100px] border cursor-pointer" :src="captchaImageSrc"
+              <el-image @click="getCaptchaImageInfo" class="w-[100px] border cursor-pointer" :src="captchaImageSrc"
                 fit="fill" />
             </template>
           </el-input>
@@ -46,6 +46,8 @@
 <script setup>
 import { useDebounceFn } from '@vueuse/core';
 const userInfoStore = useUserInfoStore();
+const {captchaImageSrc, uuid} = storeToRefs(userInfoStore);
+const {getCaptchaImageInfo, loginAction} = userInfoStore;
 
 definePageMeta({
   layout: 'login'
@@ -57,15 +59,17 @@ const ruleFormRef = ref();
 const params = reactive({
   username: "",
   password: "",
-  code: "",
-  uuid: "",
+  code: ""
 });
-
 const rules = reactive({
   username: [{ required: true, message: "请输入姓名", trigger: "blur" }],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }],
   code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
 });
+
+const loginParams = computed(() => {
+  return {...params, uuid: uuid.value}
+})
 
 const debouncedFn = useDebounceFn(() => {
   submitForm();
@@ -75,72 +79,18 @@ const loginCb = () => {
   debouncedFn();
 }
 
-const captchaImageSrc = ref();
-const getCaptchaImageSrc = async () => {
-  const { data: captchaImageInfo } = await useFetch(
-    "https://sports.d.yanlingxinrui.com/app/v1/captchaImage"
-  );
-  const captcha = toRaw(captchaImageInfo.value);
-  captchaImageSrc.value = `data:image/gif;base64,${captcha.img}`;
-  params.uuid = captcha.uuid;
-};
-await getCaptchaImageSrc();
-
-const getUserInfo = async () => {
-  const userInfo = await $fetch(
-    "https://sports.d.yanlingxinrui.com/app/v1/getInfo",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${curToken.value}`,
-      },
-    }
-  );
-  userInfo?.user && userInfoStore.setUserInfo(userInfo?.user);
-};
-
-const token = useCookie("token");
-
-const curToken = computed(() => {
-  return token.value;
-});
-
-const handleLogin = async (params) => {
-  const result = await $fetch(
-    "https://sports.d.yanlingxinrui.com/app/v1/login",
-    { method: "POST", body: params }
-  );
-  const { code, msg, token: newToken } = result;
-  if (code === 200) {
-    token.value = newToken;
-    refreshCookie("token");
-    await getUserInfo(newToken);
-    ElMessage({
-      message: msg,
-      type: "success",
-      plain: true,
-    });
-    navigateTo("/");
-  } else {
-    ElMessage({
-      message: msg,
-      type: "error",
-      plain: true,
-    });
-    getCaptchaImageSrc();
-  }
-};
-
 const submitForm = async () => {
   if (!ruleFormRef.value) return;
   await ruleFormRef.value.validate((valid, fields) => {
     if (valid) {
-      process.client && handleLogin(toRaw(params));
+      loginAction(loginParams.value);
     } else {
       console.log("error submit!", fields);
     }
   });
 };
+
+getCaptchaImageInfo();
 </script>
 
 <style lang="scss" scoped>

@@ -45,7 +45,7 @@
               <Icon name="fluent:password-20-filled" color="a2a2a2" size="25" />
             </template>
             <template #append>
-              <el-image @click="getCaptchaImageSrc" class="w-[100px] border cursor-pointer" :src="captchaImageSrc"
+              <el-image @click="getCaptchaImageInfo" class="w-[100px] border cursor-pointer" :src="captchaImageSrc"
                 fit="fill" />
             </template>
           </el-input>
@@ -59,6 +59,12 @@
 
 <script setup>
 import { useDebounceFn } from '@vueuse/core';
+import {computed} from "vue";
+const userInfoStore = useUserInfoStore();
+const {captchaImageSrc, uuid} = storeToRefs(userInfoStore);
+const {getCaptchaImageInfo, registerAction} = userInfoStore;
+
+getCaptchaImageInfo()
 
 definePageMeta({
   layout: 'login'
@@ -71,9 +77,12 @@ const params = reactive({
   username: "",
   password: "",
   confirmPassword: "",
-  code: "",
-  uuid: "",
+  code: ""
 });
+
+const registerParams = computed(() => {
+  return {...params, uuid: uuid.value}
+})
 
 const validatePass = (rule, value, callback) => {
   if (value === "") {
@@ -120,7 +129,7 @@ const submitForm = async () => {
   if (!ruleFormRef.value) return;
   await ruleFormRef.value.validate((valid, fields) => {
     if (valid) {
-      handleRegister(toRaw(params));
+      registerAction(registerParams.value);
     } else {
       console.log("error submit!", fields);
     }
@@ -135,44 +144,6 @@ const registerCb = () => {
   debouncedFn();
 }
 
-const captchaImageSrc = ref();
-const getCaptchaImageSrc = async () => {
-  const { data: captchaImageInfo } = await useFetch(
-    "https://sports.d.yanlingxinrui.com/app/v1/captchaImage"
-  );
-  const captcha = toRaw(captchaImageInfo.value);
-  captchaImageSrc.value = `data:image/gif;base64,${captcha.img}`;
-  params.uuid = captcha.uuid;
-};
-await getCaptchaImageSrc();
-
-const handleRegister = async (params) => {
-  const result = await $fetch(
-    "https://sports.d.yanlingxinrui.com/app/v1/register",
-    { method: "POST", body: params }
-  );
-  const { code, msg } = result;
-  if (code === 200) {
-    ElMessageBox.confirm("恭喜注册成功！", "提示", {
-      confirmButtonText: "去登录",
-      center: true,
-      closeOnClickModal: false,
-      showClose: false,
-      showCancelButton: false,
-    })
-      .then(() => {
-        navigateTo("/login");
-      })
-      .catch(() => { });
-  } else {
-    ElMessage({
-      message: msg,
-      type: "error",
-      plain: true,
-    });
-    getCaptchaImageSrc();
-  }
-};
 </script>
 
 <style lang="scss" scoped>

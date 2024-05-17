@@ -45,7 +45,7 @@
           <template #account>
             <div class="text-left">
               <p>{{ userInfo.email }}</p>
-              <p>{{ userInfo.phoneNumber }}</p>
+              <p>{{ userInfo.phonenumber }}</p>
               <p class="truncate font-medium text-gray-900 dark:text-white">
                 userId: {{ userInfo.userId }}
               </p>
@@ -66,8 +66,10 @@ const modal = useModal();
 const toast = useToast();
 
 const userInfoStore = useUserInfoStore();
+const { userInfo } = storeToRefs(userInfoStore);
+const { logoutAction, getUserInfo } = userInfoStore;
 
-const { user: userInfo } = storeToRefs(userInfoStore);
+getUserInfo();
 
 const userDropdownItems = [
   [{
@@ -89,8 +91,7 @@ const userDropdownItems = [
           {
             variant: 'solid', color: 'red', label: '确定',
             click: () => {
-              userInfoStore.setUserInfo();
-              navigateTo("/");
+              logoutAction();
             }
           },
           {
@@ -314,9 +315,4 @@ const getBreadcrumbList = (array, path) => {
 watch(() => route.path, (path) => {
   breadcrumbData.value = getBreadcrumbList(menuList, path)
 })
-
-
-
-
-
 </script>
