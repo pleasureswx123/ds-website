@@ -68,8 +68,8 @@
               <el-segmented v-model="ruleForm.teamType" :options="typeOptions" />
             </el-form-item>
 
-            <el-form-item class="flex-none" label="性别" prop="gender">
-              <el-radio-group v-model="ruleForm.gender">
+            <el-form-item class="flex-none" label="性别" prop="sex">
+              <el-radio-group v-model="ruleForm.sex">
                 <el-radio :value="1">男</el-radio>
                 <el-radio :value="2">女</el-radio>
               </el-radio-group>
@@ -117,8 +117,6 @@
           <UButton size="md" block color="rose" @click="submitForm(ruleFormRef)" label="报名" />
           <UButton size="md" block color="gray" @click="resetForm(ruleFormRef)" label="重置" />
         </div>
-
-
       </div>
     </div>
   </div>
@@ -126,6 +124,15 @@
 
 <script setup>
 import { Minus, Plus } from "@element-plus/icons-vue";
+
+const userInfoStore = useUserInfoStore();
+const {userInfo} = storeToRefs(userInfoStore);
+userInfoStore.getUserInfo().then(res => {
+  if(res.code !== 200) {
+    navigateTo("/login");
+  }
+});
+
 const handleFileChange = async (e, type) => {
   const file = e.target.files[0];
   const formData = new FormData();
@@ -152,7 +159,7 @@ const ruleForm = reactive({
   nickName: "",
   phoneNumber: "",
   email: "",
-  gender: "",
+  sex: "",
   teamType: "",
   introduce: "",
   experience: "",
@@ -162,10 +169,8 @@ const ruleForm = reactive({
   videoList: [],
 });
 
-const userInfoStore = useUserInfoStore();
-
 const paramsInfo = computed(() => {
-  const userId = userInfoStore?.user?.userId
+  const userId = userInfo?.value?.userId
   const { projectId, contestId, cityId, beginTime, endTime } = detailInfo.value || {};
 
   const { imgList, videoList, ...formInfo } = ruleForm;
@@ -185,7 +190,6 @@ const paramsInfo = computed(() => {
     // }
   }
 });
-
 
 const toast = useToast();
 
@@ -213,8 +217,7 @@ const submitForm = async formEl => {
             {
               variant: 'solid', color: 'red', label: '知道了',
               click: () => {
-                userInfoStore.setUserInfo();
-                navigateTo("/");
+                navigateTo('/join');
               }
             },
             // {
@@ -247,7 +250,7 @@ const rules = reactive({
     { required: true, message: "请输入邮箱", trigger: "change" },
     { type: "email", message: "邮箱格式不正确", trigger: ["blur", "change"] },
   ],
-  gender: [
+  sex: [
     {
       required: true,
       message: "请选择性别",
