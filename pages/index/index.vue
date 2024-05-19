@@ -1,5 +1,4 @@
 <template>
-
   <div class="divide-y">
 
 
@@ -81,89 +80,14 @@
         </div>
       </div>
     </section>
-
-
-
-
-    <section class="text-gray-600 body-font">
-      <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-wrap -m-4">
-          <div class="p-4 md:w-1/3">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-              <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400"
-                alt="blog">
-              <div class="p-6">
-                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">2024-05-10 18:00</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3 text-red-600">毛笔字贴大赛</h1>
-                <p class="leading-relaxed mb-3 line-clamp-5 text-ellipsis">
-                  4月14日，由中国烹饪协会主办，大匠传承（北京）饮食文化有限公司承办，企阳会展集团协办的“第二届烧烤大赛”在北京举办。中国烹饪协会监事长齐金柱，北京市屈浩烹饪服务职业技能培训学校校长、第二届烧烤大赛裁判长屈浩，深圳市正君餐饮（木屋烧烤）管理顾问有限公司联合创始人、副董事长林博，管氏餐饮（北京）有限公司董事长管其兵，北京聚点餐饮有限责任公司董事长张霖，美诺（北京）餐饮管理有限公司运营总经理王明辉，北京肉串汪餐饮管理有限公司董事长汪德仙，江苏小尾羊餐饮管理有限公司总经理王明琳，大匠传承（北京）饮食文化有限公司董事长余志强和企阳会展集团CEO高原出席了大赛开幕式，齐金柱监事长代表中国烹饪协会为比赛开幕致辞，裁判长屈浩代表全体裁判员宣誓。
-                </p>
-                <div class="flex items-center flex-wrap ">
-                  <a class="text-red-500 inline-flex items-center md:mb-2 lg:mb-0 text-red-400">查看详情
-                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M5 12h14"></path>
-                      <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="p-4 md:w-1/3">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-              <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/721x401"
-                alt="blog">
-              <div class="p-6">
-                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">2024-05-11 05:30</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3 text-red-600">明日之星厨师大赛</h1>
-                <p class="leading-relaxed mb-3 line-clamp-5 text-ellipsis">
-                  HOTELEX明日之星厨师大赛是2014年由中国烹饪协会和上海博华国际展览有限公司为提高中国青年职业厨师的技术水平，在职业院校师生队伍和中国青年厨师领域打造的专业赛事活动。经过多年培育，此赛事已逐步打造成为传承饮食文化、交流烹饪技艺、促进行业创新、挖掘优秀青年餐饮人才，弘扬工匠精神的重要平台，为完善高技能人才选拔激励机制、强化基础民生保障、丰富繁荣市场供给、促进餐饮业高质量发展作出了积极贡献。
-                </p>
-                <div class="flex items-center flex-wrap">
-                  <a class="text-red-500 inline-flex items-center md:mb-2 lg:mb-0 text-red-400">查看详情
-                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M5 12h14"></path>
-                      <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="p-4 md:w-1/3">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-              <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/722x402"
-                alt="blog">
-              <div class="p-6">
-                <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">2024-05-11 05:00</h2>
-                <h1 class="title-font text-lg font-medium text-gray-900 mb-3 text-red-600">EMC创客大赛</h1>
-                <p class="leading-relaxed mb-3 line-clamp-5 text-ellipsis">
-                  同时，举行了大赛方案专家论证会。田斌所长对各位专家给予大赛的鼎立支持表示感谢，对大赛秘书处认真务实、事无巨细、卓有成效的组织执行工作表示肯定。结合现有大赛方案，专家们针对大赛定位、特色、赛制安排、奖项设置、影响力凸显举措等方面分别提出了建设性优化建议，达成了若干共识。柳冠中教授将联袂陈汗青教授牵头组建东方创意之星工业设计大赛评委会权威专家库，为大赛提供全方位的专业指导和强有力的专家保障，力争将东方之星大赛打造成为能代表中国设计水平，具有国际影响力的工业设计标杆赛事。助力中国产业设计创新升级，以产业链前沿创新促进中国设计教育实践创新改革。聘任仪式由大赛组委会秘书长王炬主持。武汉理工大学艺术与设计学院名誉院长、二级教授、博导、东方创意之星工业设计大赛评委会执行主席陈汗青，湖南大学设计艺术学院原院长何人可教授，北京工信国际常务副总魏志国、行业研究部副主任刘杰，集美大学美术学院院长、教授陈其端等领导和专家莅临参加。
-                </p>
-                <div class="flex items-center flex-wrap ">
-                  <a class="text-red-500 inline-flex items-center md:mb-2 lg:mb-0  text-red-400">查看详情
-                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M5 12h14"></path>
-                      <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   
+    <BlockCard>
+      <ProjectList></ProjectList>
+    </BlockCard>
   
     <div>
       <img class="w-full h-32 object-cover m-auto" src="~/assets/images/banner-3.png" alt="">
     </div>
-
-
 
     <section class="text-gray-600 body-font">
       <div class="container px-5 py-24 mx-auto">
@@ -500,15 +424,7 @@
     </section>-->
 
   </div>
-
-
-
-
-
-
-
 <!--
-
   <div class="grid grid-cols-3 gap-3">
 
 
@@ -618,6 +534,9 @@
 </template>
 
 <script setup>
+import BlockCard from './components/BlockCard.vue';
+import ProjectList from './components/ProjectList.vue';
+
 useHead(() => ({
   title: "首页",
 }));
@@ -648,8 +567,4 @@ onMounted(() => {
 
 
 <style lang="scss" scoped>
-.panel {
-  height: 50vh;
-  @apply mb-3 text-stone-600;
-}
 </style>
