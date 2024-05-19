@@ -86,8 +86,12 @@
     </BlockCard>
   
     <div>
-      <img class="w-full h-32 object-cover m-auto" src="~/assets/images/banner-3.png" alt="">
+      <img class="w-full h-32 object-cover object-center" src="~/assets/images/banner-3.png" alt="">
     </div>
+    
+    <BlockCard>
+      <ContestList></ContestList>
+    </BlockCard>
 
     <section class="text-gray-600 body-font">
       <div class="container px-5 py-24 mx-auto">
@@ -536,6 +540,7 @@
 <script setup>
 import BlockCard from './components/BlockCard.vue';
 import ProjectList from './components/ProjectList.vue';
+import ContestList from './components/ContestList.vue';
 
 useHead(() => ({
   title: "首页",

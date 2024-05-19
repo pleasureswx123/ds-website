@@ -161,6 +161,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
 
 export const useAppStoreInfo = defineStore("appStoreInfo", () => {
   const projectList = ref([]);
+  const contestList = ref([]);
   const detailInfo = ref(null);
   const router = useRouter();
   const getProjectList = async ({ pageNum = 1, pageSize = 10 } = {}) => {
@@ -186,7 +187,9 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
       console.log(err);
     });
     if (result.code === 200) {
-      return result?.rows;
+      const resData = result?.rows || [];
+      contestList.value = resData;
+      return resData;
     }
   }
   const getContestDetail = async ({ id } = {}) => {
@@ -236,7 +239,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     path && router.push(path);
   }
   return {
-    jumpPath, apiBase, projectList, detailInfo,
+    jumpPath, apiBase, projectList, contestList, detailInfo,
     getProjectList, getContestList, getNotificationList, getBroadcastList,
     getProjectDetail, getContestDetail, getNotificationDetail, getBroadcastDetail,
   }
