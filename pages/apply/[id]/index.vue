@@ -2,7 +2,7 @@
   <div class="container p-8 m-auto">
     <div class="flex gap-8 md:flex-row flex-col" v-if="detailInfo">
       <div class="md:w-2/5 w-full  text-gray-600 shrink-0">
-        <img class="w-full h-60 object-cover object-center rounded" :src="baseApi + detailInfo.thumbnail"
+        <img class="w-full h-60 object-cover object-center rounded" :src="getStaticPath(detailInfo.thumbnail)"
           alt="thumbnail">
         <div class="py-6 px-3">
           <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{
@@ -29,7 +29,7 @@
         <div class="text-gray-900 space-y-2 text-base border rounded p-3 shadow-lg ring ring-red-200 bg-red-100">
           <div>项目名称：{{ detailInfo.project.projectName }}</div>
           <div>大赛名称：{{ detailInfo.name }}</div>
-          <div>比赛城市：{{ detailInfo.cityId }}</div>
+          <div>比赛城市：{{ getCityIdToName(detailInfo.cityId) }}</div>
           <div>比赛时间：{{ detailInfo.createTime }} 至 {{ detailInfo.endTime }}</div>
         </div>
         <UDivider label="请填写报名信息" :ui="{ label: 'text-red-500' }" />
@@ -127,33 +127,23 @@ import { Minus, Plus } from "@element-plus/icons-vue";
 
 const userInfoStore = useUserInfoStore();
 const {userInfo} = storeToRefs(userInfoStore);
-userInfoStore.getUserInfo().then(res => {
+await userInfoStore.getUserInfo().then(res => {
   if(res.code !== 200) {
     navigateTo("/login");
   }
 });
 
-const handleFileChange = async (e, type) => {
-  const file = e.target.files[0];
-  const formData = new FormData();
-  formData.append("file", file);
-  const result = await $fetch(`${baseApi}/common/upload`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${curToken.value}`,
-    },
-    body: formData,
-  }).catch((err) => err.data);
-  const { code, url } = result;
-  if (code === 200) {
-    if (type === 'img') {
-      ruleForm.imgList = [...ruleForm.imgList, url];
-    }
-    if (type === 'video') {
-      ruleForm.videoList = [...ruleForm.videoList, url];
-    }
-  }
-}
+const route = useRoute();
+const toast = useToast();
+const {public: {apiBase}} = useRuntimeConfig();
+
+const appStoreInfo = useAppStoreInfo();
+const {detailInfo} = storeToRefs(appStoreInfo);
+const {getContestDetail} = appStoreInfo;
+
+const contestId = route.params.id;
+await getContestDetail({id: contestId });
+
 const ruleFormRef = ref();
 const ruleForm = reactive({
   nickName: "",
@@ -168,11 +158,43 @@ const ruleForm = reactive({
   imgList: [],
   videoList: [],
 });
+const rules = {
+  nickName: [{ required: true, message: "请输入姓名", trigger: "change" }],
+  phoneNumber: [
+    { required: true, message: "请输入手机号", trigger: "change" },
+    { pattern: /^1[3-9]\d{9}$/, message: "手机号格式不正确", trigger: "change" },
+  ],
+  email: [
+    { required: true, message: "请输入邮箱", trigger: "change" },
+    { type: "email", message: "邮箱格式不正确", trigger: ["blur", "change"] },
+  ],
+  sex: [
+    {
+      required: true,
+      message: "请选择性别",
+      trigger: "change",
+    },
+  ],
+  teamType: [
+    {
+      required: true,
+      message: "请选择类型",
+      trigger: "change",
+    },
+  ],
+  introduce: [{ required: true, message: "请输入内容", trigger: "change" }],
+  experience: [{ required: true, message: "请输入内容", trigger: "change" }],
+  expectation: [{ required: true, message: "请输入内容", trigger: "change" }],
+  other: [{ required: true, message: "请输入内容", trigger: "change" }],
+};
+const typeOptions = [
+  { label: "个人性质", value: 0 },
+  { label: "单位性质", value: 1 },
+];
 
 const paramsInfo = computed(() => {
   const userId = userInfo?.value?.userId
   const { projectId, contestId, cityId, beginTime, endTime } = detailInfo.value || {};
-
   const { imgList, videoList, ...formInfo } = ruleForm;
   return {
     userId,
@@ -191,21 +213,47 @@ const paramsInfo = computed(() => {
   }
 });
 
-const toast = useToast();
+const resetForm = (formEl) => {
+  if (!formEl) return;
+  formEl.resetFields();
+};
+
+const handleFileChange = async (e, type) => {
+  const token = useCookie("token");
+  const file = e.target.files[0];
+  const formData = new FormData();
+  formData.append("file", file);
+  const result = await $fetch(`${apiBase}/common/upload`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token.value}`,
+    },
+    body: formData,
+  }).catch((err) => err.data);
+  const { code, url } = result;
+  if (code === 200) {
+    if (type === 'img') {
+      ruleForm.imgList = [...ruleForm.imgList, url];
+    }
+    if (type === 'video') {
+      ruleForm.videoList = [...ruleForm.videoList, url];
+    }
+  }
+}
 
 const submitForm = async formEl => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
-      const result = await $fetch(`${baseApi}/system/signup`, {
+      const token = useCookie("token");
+      const result = await $fetch(`${apiBase}/system/signup`, {
         method: "POST",
         body: paramsInfo.value,
         headers: {
-          Authorization: `Bearer ${curToken.value}`,
+          Authorization: `Bearer ${token.value}`,
         },
       });
       const { code } = result || {};
-      console.log(1112234, result);
       if (code === 200) {
         toast.add({
           timeout: 0,
@@ -236,82 +284,9 @@ const submitForm = async formEl => {
   });
 };
 
-const typeOptions = [
-  { label: "个人性质", value: 0 },
-  { label: "单位性质", value: 1 },
-];
-const rules = reactive({
-  nickName: [{ required: true, message: "请输入姓名", trigger: "change" }],
-  phoneNumber: [
-    { required: true, message: "请输入手机号", trigger: "change" },
-    { pattern: /^1[3-9]\d{9}$/, message: "手机号格式不正确", trigger: "change" },
-  ],
-  email: [
-    { required: true, message: "请输入邮箱", trigger: "change" },
-    { type: "email", message: "邮箱格式不正确", trigger: ["blur", "change"] },
-  ],
-  sex: [
-    {
-      required: true,
-      message: "请选择性别",
-      trigger: "change",
-    },
-  ],
-  teamType: [
-    {
-      required: true,
-      message: "请选择类型",
-      trigger: "change",
-    },
-  ],
-  introduce: [{ required: true, message: "请输入内容", trigger: "change" }],
-  experience: [{ required: true, message: "请输入内容", trigger: "change" }],
-  expectation: [{ required: true, message: "请输入内容", trigger: "change" }],
-  other: [{ required: true, message: "请输入内容", trigger: "change" }],
-});
-
-const resetForm = (formEl) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
-
-
-const route = useRoute();
-const { baseApi } = useAppConfig();
-
-const token = useCookie("token");
-const curToken = computed(() => {
-  return token.value;
-});
-const detailInfo = ref(null);
-
-const contestId = route.params.id;
-const projectId = ref();
-
-
 const handleJumpTo = () => {
   navigateTo(`/join/${contestId}`);
 }
-
-
-const getDetail = async (id) => {
-  const result = await $fetch(
-    `${baseApi}/system/contest/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${curToken.value}`,
-      },
-    },
-  );
-  const { code, data } = result || {};
-  if (code === 200) {
-    detailInfo.value = data;
-    projectId.value = data.projectId;
-  }
-}
-
-getDetail(contestId);
 </script>
 
 <style lang="scss" scoped></style>

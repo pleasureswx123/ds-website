@@ -1,5 +1,4 @@
 export default defineAppConfig({
-  baseApi: 'https://sports.d.yanlingxinrui.com/app/v1',
   ui: {
     // icons: {
     //   dynamic: true

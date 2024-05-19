@@ -1,13 +1,13 @@
 <template>
   <div class="flex">
     <div class="flex flex-wrap">
-      <div class="w-72 border rounded m-2 flex-wrap relative cursor-pointer" v-for="(item, index) in projectList" :key="index"
-           @click="goDetail(item)">
-        <el-image :src="baseApi+item.thumbnail" fit="cover" class="cursor-pointer h-64 w-full">
+      <div class="w-72 border rounded m-2 flex-wrap relative cursor-pointer" v-for="(item, index) in projectList"
+        :key="index" @click="goDetail(item)">
+        <el-image :src="getStaticPath(item.thumbnail)" fit="cover" class="cursor-pointer h-64 w-full">
           <template #error>
             <div class="h-64 flex items-center justify-center bg-gray-200">
               <el-icon :size="80" color="#fff">
-                <Picture/>
+                <Picture />
               </el-icon>
             </div>
           </template>
@@ -18,18 +18,17 @@
         </div>
       </div>
     </div>
-    
+
     <div class="flex flex-1 justify-center items-center" v-if="projectList.length === 0">
-      <el-empty :image-size="200" description="暂无数据~"/>
+      <el-empty :image-size="200" description="暂无数据~" />
     </div>
-  
+
   </div>
 </template>
 
 <script setup>
 import {Picture} from "@element-plus/icons-vue";
 const appStoreInfo = useAppStoreInfo();
-const baseApi = appStoreInfo.baseApi;
 const {projectList} = storeToRefs(appStoreInfo);
 appStoreInfo.getProjectList();
 

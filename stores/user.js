@@ -1,5 +1,9 @@
 import { useLocalStorage } from "@vueuse/core";
 
+const {
+  public: { apiBase },
+} = useRuntimeConfig();
+
 export const useUserInfoStore = defineStore("userInfo", () => {
   const userData = useLocalStorage("user", "");
   const state = reactive({
@@ -11,7 +15,6 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     state.user = user;
   }
 
-  const { baseApi } = useAppConfig();
   const captchaImageInfo = reactive({
     img: '', uuid: ''
   });
@@ -21,7 +24,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   token.value = token.value || '';
   const userInfo = ref(null);
   const getCaptchaImageInfo = async () => {
-    const result = await $fetch(`${baseApi}/captchaImage`).catch((err) => {
+    const result = await $fetch(`${apiBase}/captchaImage`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -32,7 +35,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     }
   }
   const logoutAction = async () => {
-    const result = await $fetch(`${baseApi}/logout`, {
+    const result = await $fetch(`${apiBase}/logout`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token.value}`,
@@ -41,13 +44,14 @@ export const useUserInfoStore = defineStore("userInfo", () => {
       console.log(err)
     });
     if(result.code === 200) {
+      token.value = '';
       userInfo.value = null;
       navigateTo("/");
     }
   }
   const loginAction = async (params) => {
     debugger
-    const result = await $fetch(`${baseApi}/login`, {
+    const result = await $fetch(`${apiBase}/login`, {
       method: 'POST', body: params || {}
     }).catch((err) => {
       console.log(err);
@@ -76,7 +80,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   }
 
   const getUserInfo = async () => {
-    const result = await $fetch(`${baseApi}/getInfo`, {
+    const result = await $fetch(`${apiBase}/getInfo`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token.value}`,
@@ -107,7 +111,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
 
   const setUserRoles = async (params) => {
     debugger
-    const result = await $fetch(`${baseApi}/system/user`, {
+    const result = await $fetch(`${apiBase}/system/user`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token.value}`,
@@ -122,7 +126,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   }
 
   const registerAction = async (params) => {
-    const result = await $fetch(`${baseApi}/register`, {
+    const result = await $fetch(`${apiBase}/register`, {
       method: "POST", body: params
     });
     const { code, msg } = result;
@@ -150,18 +154,17 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   return {
     user,
     setUserInfo,
-    baseApi, captchaImageInfo, captchaImageSrc, uuid, userInfo,
+    apiBase, captchaImageInfo, captchaImageSrc, uuid, userInfo,
     getCaptchaImageInfo, loginAction, logoutAction, getUserInfo, setUserRoles, registerAction,
   };
 });
 
 export const useAppStoreInfo = defineStore("appStoreInfo", () => {
-  const { baseApi } = useAppConfig();
   const projectList = ref([]);
   const detailInfo = ref(null);
   const router = useRouter();
   const getProjectList = async ({ pageNum = 1, pageSize = 10 } = {}) => {
-    const result = await $fetch(`${baseApi}/system/project/list?pageNum=${pageNum}&pageSize=${pageSize}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/project/list?pageNum=${pageNum}&pageSize=${pageSize}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -170,7 +173,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getProjectDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${baseApi}/system/project/${id}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/project/${id}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -179,7 +182,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getContestList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
-    const result = await $fetch(`${baseApi}/system/contest/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/contest/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -187,7 +190,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getContestDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${baseApi}/system/contest/${id}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/contest/${id}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -196,7 +199,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getNotificationList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
-    const result = await $fetch(`${baseApi}/system/notification/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/notification/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -204,7 +207,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getNotificationDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${baseApi}/system/notification/${id}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/notification/${id}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -213,7 +216,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getBroadcastList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
-    const result = await $fetch(`${baseApi}/system/broadcast/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/broadcast/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -221,7 +224,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getBroadcastDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${baseApi}/system/broadcast/${id}`).catch((err) => {
+    const result = await $fetch(`${apiBase}/system/broadcast/${id}`).catch((err) => {
       console.log(err);
     });
     if (result.code === 200) {
@@ -233,7 +236,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     path && router.push(path);
   }
   return {
-    jumpPath, baseApi, projectList, detailInfo,
+    jumpPath, apiBase, projectList, detailInfo,
     getProjectList, getContestList, getNotificationList, getBroadcastList,
     getProjectDetail, getContestDetail, getNotificationDetail, getBroadcastDetail,
   }
