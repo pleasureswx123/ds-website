@@ -54,7 +54,7 @@
     </BlockCard>
     
 
-    <section class="text-gray-600 overflow-hidden px-5 py-12">
+    <section class="text-gray-600 overflow-hidden py-12">
       
       <h1 class="text-lg p-4 border-b border-gray-300 font-medium text-gray-600 text-justify bg-red-600 text-white rounded-lg">历届赛事</h1>
       

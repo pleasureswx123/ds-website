@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col md:flex-row md:gap-6">
+  <div class="flex flex-col md:flex-row md:gap-6 shadow-lg">
     <div class="md:grow flex flex-wrap md:flex-nowrap">
       <template v-for="(item, index) in menuList">
         <div v-if="!item.children" class="group grow"
