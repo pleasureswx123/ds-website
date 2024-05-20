@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap select-none">
     <div class="p-4 md:w-1/3" v-for="item in projectList" :key="item.projectId">
       <div class="shadow-md ring-1 ring-inset ring-gray-200 rounded-lg overflow-hidden transition duration-150 ease-out hover:ease-in hover:shadow-2xl">
         <div class="w-full aspect-[2/1] overflow-hidden">

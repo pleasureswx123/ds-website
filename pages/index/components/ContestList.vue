@@ -8,7 +8,7 @@
         </div>
         <div class="p-4">
           <h2 class="tracking-widest text-xs font-medium text-gray-400 mb-1">{{item.project.projectName}}&nbsp;</h2>
-          <h1 class="h-14 text-lg font-medium text-gray-900 mb-1 text-red-600 line-clamp-2 text-ellipsis  text-justify">{{item.name}}</h1>
+          <h1 class="md:h-14 text-lg font-medium mb-1 text-red-600 line-clamp-2 text-ellipsis  text-justify">{{item.name}}</h1>
           <div class="flex items-center mb-3 text-[10px]">
             <UBadge size="xs" color="red" variant="soft">开始时间</UBadge>
             <div class="mr-auto">{{item.beginTime}}</div>
