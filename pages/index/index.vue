@@ -2,27 +2,11 @@
   <div class="divide-y">
     
     <section class="text-gray-600 py-12">
-      <div class="flex flex-wrap gap-8">
+      <div class="flex flex-wrap md:flex-nowrap gap-8">
         <div class="w-full md:w-3/5">
           <Banner></Banner>
         </div>
-        <div class="w-full md:flex-1">
-          <div class="aspect-[2/1] relative">
-            <img class="w-full h-full object-cover object-center rounded-lg" alt="hero" src="~/assets/images/123.png" />
-            <div class="absolute top-3 right-0 text-white bg-red-500 rounded-l-full text-xs p-1 px-2 shadow">上海市</div>
-          </div>
-          <h1 class="pt-3 pb-1 font-medium text-red-600 truncate">第八届 HOTELEX明日之星厨师大赛 烹饪协会</h1>
-          <p class="leading-normal line-clamp-2 text-ellipsis text-justify">
-            由中国烹饪协会和上海博华国际展览有限公司主办，中国烹饪协会餐饮教育工作委员会、上海旅游高等专科学校承办，上海中侨职业技术大学、上海松江志达职业技能培训中心协办的第八届HOTELEX明日之星厨师大赛在上海国家会展中心举办。中国烹饪协会副会长乔杰、上海博华国际展览有限公司食品酒店及生活方式事业部总监朱美君出席开幕仪式并致辞。
-          </p>
-          <div class="pt-3 flex gap-2 items-center">
-            <UButton class="mr-auto" size="md" @click="navigateTo('/apply/8')">立即报名</UButton>
-            <UBadge size="xs" color="red" variant="soft">开始时间</UBadge>
-            <div>2024-05-20</div>
-            <UBadge size="xs" color="red" variant="soft">结束时间</UBadge>
-            <div>2024-05-25</div>
-          </div>
-        </div>
+        <TopContest></TopContest>
       </div>
     </section>
     
@@ -443,6 +427,7 @@
 
 <script setup>
 import Banner from './components/Banner.vue';
+import TopContest from './components/TopContest.vue';
 import BlockCard from './components/BlockCard.vue';
 import ProjectList from './components/ProjectList.vue';
 import ContestList from './components/ContestList.vue';
