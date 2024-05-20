@@ -1,5 +1,5 @@
 <template>
-  <section class="py-24 text-gray-600">
+  <section class="py-12 text-gray-600">
     <slot></slot>
   </section>
 </template>
