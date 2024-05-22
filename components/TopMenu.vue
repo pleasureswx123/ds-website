@@ -157,49 +157,49 @@ const menuList = [
     icon: 'i-heroicons-home',
     to: '/'
   },
-  {
-    label: '比赛分类',
-    to: '/race',
-    children: [
-      [{
-        label: '篮球赛事项目',
-        to: '/race/1',
-        click: () => {
-          console.log('Edit')
-        }
-      }],[ {
-        label: '乒乓球赛事项目',
-          to: '/race/2',
-          click: () => {
-            console.log('Edit')
-          }
-      }], [{
-        label: '羽毛球赛事项目',
-          to: '/race/3',
-          click: () => {
-            console.log('Edit')
-          }
-      }], [{
-        label: '足球赛事项目',
-          to: '/race/4',
-          click: () => {
-            console.log('Edit')
-          }
-      }], [{
-        label: '书画赛事项目',
-          to: '/race/5',
-          click: () => {
-            console.log('Edit')
-          }
-      }, {
-          label: '田径赛事项目',
-          to: '/race/5',
-          click: () => {
-            console.log('Edit')
-          }
-        }]
-      ]
-  },
+  // {
+  //   label: '比赛分类',
+  //   to: '/race',
+  //   children: [
+  //     [{
+  //       label: '篮球赛事项目',
+  //       to: '/race/1',
+  //       click: () => {
+  //         console.log('Edit')
+  //       }
+  //     }],[ {
+  //       label: '乒乓球赛事项目',
+  //         to: '/race/2',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }], [{
+  //       label: '羽毛球赛事项目',
+  //         to: '/race/3',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }], [{
+  //       label: '足球赛事项目',
+  //         to: '/race/4',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }], [{
+  //       label: '书画赛事项目',
+  //         to: '/race/5',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //     }, {
+  //         label: '田径赛事项目',
+  //         to: '/race/5',
+  //         click: () => {
+  //           console.log('Edit')
+  //         }
+  //       }]
+  //     ]
+  // },
   {
     label: '我要参赛',
     to: '/join',
