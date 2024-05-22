@@ -1,32 +1,48 @@
 <template>
-  <div class="flex flex-col md:flex-row md:gap-6 shadow-lg">
-    <div class="md:grow flex flex-wrap md:flex-nowrap">
-      <template v-for="(item, index) in menuList">
-        <div v-if="!item.children" class="group grow"
+  <div class="flex flex-row shadow-lg">
+    <div class="menu-icon-box md:!hidden">
+      <UIcon class="text-2xl text-white" name="i-heroicons-bars-3" />
+      <div class="menu-nav-list">
+        <div class="menu-nav-list-item" v-for="(item, index) in menuList.slice(1)"  @click="handleClick(item)" :key="index">
+          <div class="label">{{item.label}}</div>
+          <UIcon v-if="item.children" class="shrink-0" name="i-heroicons-chevron-right" />
+          <div v-if="item.children" class="sub-nav-list">
+            <div class="sub-item" v-for="(subItem, subIndex) in item.children" @click.stop="handleClick(subItem[0])" :key="subIndex">{{subItem[0].label}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="group shrink-0 inline-flex" :class="{ active: $route.path === '/' }">
+      <div class="text-center w-full truncate cursor-pointer text-white px-5 md:px-10 py-2 text-base font-medium leading-loose hover:bg-red-500 group-[.active]:bg-red-700" @click="handleClick(menuList[0])">
+        <UAvatar :ui="{ wrapper: 'bg-white inline-block align-middle mr-3 -mt-1' }" size="sm" :src="LogoImg" alt="职工文体" /> 首页
+      </div>
+    </div>
+    <div class="grow hidden pr-6 md:!inline-flex">
+      <template v-for="(item, index) in menuList.slice(1)">
+        <div v-if="!item.children" class="group flex-1"
           :class="{ active: $route.path.length === 1 ? $route.path === item.to : item.to.startsWith($route.path) }">
           <div
-            class="text-center w-full truncate cursor-pointer text-white px-2 text-base font-bold h-10 leading-10 hover:bg-red-500 group-[.active]:bg-red-700"
+            class="text-center w-full truncate cursor-pointer text-white py-2 text-base font-medium leading-loose hover:bg-red-500 group-[.active]:bg-red-700"
             @click="handleClick(item)">
             <UAvatar v-if="item.to === '/'" :ui="{ wrapper: 'bg-white inline-block align-middle mr-3 -mt-1' }" size="sm"
               :src="LogoImg" alt="职工文体" />
             {{ item.label }}
           </div>
         </div>
-        <div class="group grow" v-else
+        <div class="group flex-1" v-else
           :class="{ active: $route.path.length === 1 ? $route.path === item.to : $route.path.startsWith(item.to) }">
           <UDropdown :items="item.children" mode="hover" :popper="{ offsetDistance: -10, placement: 'bottom-start' }"
             :ui="{ wrapper: 'w-full', rounded: 'rounded-none', item: { disabled: 'cursor-auto', inactive: 'text-white', active: 'bg-red-700 text-white' }, background: 'bg-red-600', ring: 'ring-red-500', divide: 'divide-red-500' }">
             <div
-              class="text-center w-full truncate cursor-pointer text-white px-2 text-base font-bold h-10 leading-10 hover:bg-red-500 group-[.active]:bg-red-700"
+              class="text-center w-full truncate cursor-pointer text-white py-2 text-base font-medium leading-loose hover:bg-red-500 group-[.active]:bg-red-700"
               @click="handleClick(item)">{{ item.label }}
               <UIcon class="-mt-1" name="i-heroicons-chevron-down-20-solid" />
             </div>
-
           </UDropdown>
         </div>
       </template>
     </div>
-    <div class="ml-auto shrink-0 flex items-center gap-3 pb-3 md:pb-0">
+    <div class="ml-auto shrink-0 inline-flex items-center gap-3">
       <template v-if="!userInfo">
         <UButtonGroup size="2xs" orientation="horizontal">
           <UButton @click="handleClick({ to: '/login' })" icon="i-heroicons-user-circle" label="登录"
@@ -128,6 +144,7 @@ const userDropdownItems = [
 ]
 
 const handleClick = (item) => {
+  console.log(111, item)
   if (item.to) {
     router.push(item.to)
   }
@@ -140,49 +157,49 @@ const menuList = [
     icon: 'i-heroicons-home',
     to: '/'
   },
-  // {
-  //   label: '比赛分类',
-  //   to: '/race',
-  //   children: [
-  //     [{
-  //       label: '篮球赛事项目',
-  //       to: '/race/1',
-  //       click: () => {
-  //         console.log('Edit')
-  //       }
-  //     }],[ {
-  //       label: '乒乓球赛事项目',
-  //         to: '/race/2',
-  //         click: () => {
-  //           console.log('Edit')
-  //         }
-  //     }], [{
-  //       label: '羽毛球赛事项目',
-  //         to: '/race/3',
-  //         click: () => {
-  //           console.log('Edit')
-  //         }
-  //     }], [{
-  //       label: '足球赛事项目',
-  //         to: '/race/4',
-  //         click: () => {
-  //           console.log('Edit')
-  //         }
-  //     }], [{
-  //       label: '书画赛事项目',
-  //         to: '/race/5',
-  //         click: () => {
-  //           console.log('Edit')
-  //         }
-  //     }, {
-  //         label: '田径赛事项目',
-  //         to: '/race/5',
-  //         click: () => {
-  //           console.log('Edit')
-  //         }
-  //       }]
-  //     ]
-  // },
+  {
+    label: '比赛分类',
+    to: '/race',
+    children: [
+      [{
+        label: '篮球赛事项目',
+        to: '/race/1',
+        click: () => {
+          console.log('Edit')
+        }
+      }],[ {
+        label: '乒乓球赛事项目',
+          to: '/race/2',
+          click: () => {
+            console.log('Edit')
+          }
+      }], [{
+        label: '羽毛球赛事项目',
+          to: '/race/3',
+          click: () => {
+            console.log('Edit')
+          }
+      }], [{
+        label: '足球赛事项目',
+          to: '/race/4',
+          click: () => {
+            console.log('Edit')
+          }
+      }], [{
+        label: '书画赛事项目',
+          to: '/race/5',
+          click: () => {
+            console.log('Edit')
+          }
+      }, {
+          label: '田径赛事项目',
+          to: '/race/5',
+          click: () => {
+            console.log('Edit')
+          }
+        }]
+      ]
+  },
   {
     label: '我要参赛',
     to: '/join',
@@ -316,3 +333,30 @@ watch(() => route.path, (path) => {
   breadcrumbData.value = getBreadcrumbList(menuList, path)
 })
 </script>
+
+<style lang="scss" scoped>
+.menu-icon-box {
+  @apply shrink-0 inline-flex px-5 items-center justify-center relative hover:bg-red-500 shadow-xl;
+  .menu-nav-list {
+    @apply absolute top-full left-0 hidden bg-red-600 text-white shadow-lg z-10;
+    .menu-nav-list-item {
+      @apply p-3 px-5 text-base cursor-pointer hover:bg-red-700 hover:font-medium flex items-center gap-2 relative  whitespace-nowrap;
+      .label {
+        @apply truncate grow;
+      }
+      &:hover .sub-nav-list{
+        @apply block;
+      }
+      .sub-nav-list {
+        @apply hidden absolute left-full top-0 z-10 bg-red-600 text-white shadow-xl;
+        .sub-item {
+          @apply p-3 px-5 text-base cursor-pointer hover:bg-red-700 hover:font-medium whitespace-nowrap;
+        }
+      }
+    }
+  }
+  &:hover .menu-nav-list {
+    @apply block;
+  }
+}
+</style>
