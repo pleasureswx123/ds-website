@@ -1,30 +1,17 @@
 <template>
-  <div class="flex">
-    <ContentWrapper>
-      <template #sidebar>
-        <CardArea>
-          <template #title>
-            <div class="">通知公告</div>
-          </template>
-          <div class="divide-y divide-red-400 divide-dashed text-center">
-            <div class="py-4 cursor-pointer hover:bg-orange-100 aria-selected:text-red-500 aria-selected:font-bold"
-                 :aria-selected="projectId === item.projectId"
-              v-for="(item, index) in projectList" :key="index" @click="projectId = item.projectId">{{ item.projectName }}</div>
+  <div class="flex flex-col md:flex-row gap-6">
+    <Sidebar class="md:w-1/4 shrink-0" v-model="projectId" title="通知公告" :list="projectListData"></Sidebar>
+    <div v-if="!!notificationList.length" class="grow divide-y divide-gray-200 divide-dashed">
+      <div class="p-2 py-5 flex gap-4 items-center cursor-pointer hover:bg-gray-50 group"
+           v-for="(item, index) in notificationList" :key="index" @click="goDetail(item)">
+          <div class="grow w-0 group-hover:text-red-600 cursor-pointer truncate">
+            {{ item.notificationName }}
           </div>
-        </CardArea>
-      </template>
-    </ContentWrapper>
-    <div class="flex-1 pl-10">
-
-      <div class="p-5 flex border-b justify-between cursor-pointer" v-for="(item, index) in notificationList" :key="index">
-          <p class="truncate hover:text-red-500 cursor-pointer"  @click="goDetail(item)">{{ item.notificationName }}</p>
-          <p class="text-sm text-gray-500">{{ item.createTime }}</p>
+          <p class="shrink-0 text-sm text-gray-500">{{ item.createTime }}</p>
         </div>
-
-        <div class="flex justify-center items-center" v-if="notificationList.length === 0">
-          <el-empty :image-size="200" description="暂无数据~" />
-        </div>
-
+    </div>
+    <div v-else class="grow flex h-96 justify-center items-center">
+      <el-empty :image-size="200" description="暂无数据~" />
     </div>
   </div>
 </template>
@@ -33,6 +20,16 @@
 const appStoreInfo = useAppStoreInfo();
 const {projectList} = storeToRefs(appStoreInfo);
 appStoreInfo.getProjectList();
+
+const projectListData = computed(() => {
+  return (projectList.value || []).map(item => {
+    return {
+      value: item.projectId,
+      label: item.projectName,
+      ...item
+    }
+  })
+})
 
 const projectId = ref('');
 watch(projectList, (list) => {

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col md:flex-row gap-4">
     <Sidebar class="md:w-1/4 shrink-0" v-model="projectId" title="赛事项目" :list="projectListData"></Sidebar>
-    <div class="grow grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+    <div v-if="!!contestList.length" class="grow grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
       <div class="shadow ring-1 ring-gray-100 hover:shadow-lg rounded-lg relative pb-3" v-for="(item, index) in contestList" :key="index" @click="goDetail(item)">
         <el-image :src="getStaticPath(item.thumbnail)" fit="cover" class="cursor-pointer w-full aspect-[4/3] rounded-t-lg">
           <template #error>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="grow flex h-52 justify-center items-center" v-if="contestList.length === 0">
+    <div v-else class="grow flex h-96 justify-center items-center">
       <el-empty :image-size="200" description="暂无数据~" />
     </div>
   </div>

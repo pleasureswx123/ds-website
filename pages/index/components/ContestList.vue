@@ -3,7 +3,7 @@
     <div class="p-4 md:w-1/4" v-for="item in contestList" :key="item.contestId">
       <div class="shadow-md ring-1 ring-inset ring-gray-200 rounded-lg overflow-hidden transition duration-150 ease-out hover:ease-in hover:shadow-2xl">
         <div class="w-full aspect-[2/1] overflow-hidden relative">
-          <img class="w-full h-full object-cover object-center transition duration-150 ease-out hover:ease-in hover:scale-110" :src="getStaticPath(item.thumbnail)" alt="blog" />
+          <img class="w-full h-full object-cover object-center transition duration-150 ease-out hover:ease-in hover:scale-110" :src="getStaticPath(item.thumbnail)" alt="image" />
           <div class="absolute top-3 right-0 text-white bg-red-500 rounded-l-full text-xs p-1 px-2 shadow">{{getCityIdToName(item.cityId)}}</div>
         </div>
         <div class="p-4">
