@@ -1,47 +1,30 @@
 <template>
-  <div class="flex">
-    <ContentWrapper>
-      <template #sidebar>
-        <CardArea>
-          <template #title>
-            <div class="">赛事项目</div>
-          </template>
-          <div class="divide-y divide-red-400 divide-dashed text-center">
-            <div class="py-4 cursor-pointer hover:bg-orange-100 aria-selected:text-red-500 aria-selected:font-bold"
-              :aria-selected="projectId === item.projectId" v-for="(item, index) in projectList" :key="index"
-              @click="projectId = item.projectId">{{ item.projectName }}</div>
-          </div>
-        </CardArea>
-      </template>
-    </ContentWrapper>
-    <div class="flex flex-wrap">
-      <div class="w-72 border rounded m-2 flex-wrap relative" v-for="(item, index) in contestList" :key="index">
-        <el-image :src="getStaticPath(item.thumbnail)" fit="cover" class="cursor-pointer h-64 w-full"
-          @click="goDetail(item)">
+  <div class="flex flex-col md:flex-row gap-4">
+    <Sidebar class="md:w-1/4 shrink-0" v-model="projectId" title="赛事项目" :list="projectListData"></Sidebar>
+    <div class="grow grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div class="shadow ring-1 ring-gray-100 hover:shadow-lg rounded-lg relative pb-3" v-for="(item, index) in contestList" :key="index" @click="goDetail(item)">
+        <el-image :src="getStaticPath(item.thumbnail)" fit="cover" class="cursor-pointer w-full aspect-[4/3] rounded-t-lg">
           <template #error>
-            <div class="h-64 flex items-center justify-center bg-gray-200" @click="goDetail(item)">
+            <div class="w-full h-full flex items-center justify-center bg-gray-100" @click="goDetail(item)">
               <el-icon :size="80" color="#fff">
                 <Picture />
               </el-icon>
             </div>
           </template>
         </el-image>
-        <div class="absolute right-1 top-1 bg-red-500 text-white rounded p-1 text-sm">{{ getCityIdToName(item.cityId) }}
+        <div class="absolute shadow-lg right-0 top-2 bg-red-500 text-white rounded-l-full p-1 text-xs px-2 leading-normal">{{ getCityIdToName(item.cityId) }}</div>
+        <div class="p-2 px-3 space-y-2">
+          <p class="font-bold text-base truncate cursor-pointer text-gray-800">{{ item.name }}</p>
+          <p class="text-sm text-gray-500 leading-normal">起至时间: {{ item.beginTime }}至{{ item.endTime }}</p>
         </div>
-        <div class="p-2">
-          <p class="font-bold truncate cursor-pointer" @click="goDetail(item)">{{ item.name }}</p>
-          <p class="mt-2 text-sm text-gray-500">起至时间：{{ item.beginTime }}至{{ item.endTime }}</p>
-        </div>
-        <div class="mt-1 mb-3 flex items-center justify-center cursor-pointer"
-          @click="appStoreInfo.jumpPath(`/apply/${item.contestId}`)"><el-button type="danger" round>我要报名</el-button>
+        <div class="mt-1 px-3 flex items-center justify-center cursor-pointer">
+          <UButton block :ui="{ rounded: 'rounded-full' }" size="md" @click.stop="navigateTo(`/apply/${item.contestId}`)">我要报名</UButton>
         </div>
       </div>
     </div>
-
-    <div class="flex flex-1 justify-center items-center" v-if="contestList.length === 0">
+    <div class="grow flex h-52 justify-center items-center" v-if="contestList.length === 0">
       <el-empty :image-size="200" description="暂无数据~" />
     </div>
-
   </div>
 </template>
 
@@ -50,6 +33,16 @@ import { Picture } from "@element-plus/icons-vue";
 const appStoreInfo = useAppStoreInfo();
 const {projectList} = storeToRefs(appStoreInfo);
 appStoreInfo.getProjectList();
+
+const projectListData = computed(() => {
+  return (projectList.value || []).map(item => {
+    return {
+      value: item.projectId,
+      label: item.projectName,
+      ...item
+    }
+  })
+})
 
 const projectId = ref('');
 watch(projectList, (list) => {
