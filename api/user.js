@@ -1,4 +1,4 @@
 export default {
   getCaptchaImage: () =>
-    useFetch("https://sports.d.yanlingxinrui.com/app/v1/captchaImage"),
+    useFetch("http://www.zgwtds.cn/app/v1/captchaImage"),
 };

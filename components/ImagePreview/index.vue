@@ -20,7 +20,7 @@ const isExternal = (path) => {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
 
-const VITE_APP_BASE_API = 'https://sports.d.yanlingxinrui.com/app/v1';
+const VITE_APP_BASE_API = 'http://www.zgwtds.cn/app/v1';
 
 const props = defineProps({
   src: {

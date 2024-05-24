@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: 'https://sports.d.yanlingxinrui.com/app/v1'
+      apiBase: 'http://www.zgwtds.cn/app/v1'
     }
   },
   modules: [
