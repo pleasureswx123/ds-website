@@ -20,7 +20,7 @@
             </a>
             <span
               class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1">
-              {{ detailInfo.project.isWorks }}
+<!--              {{ detailInfo.project.isWorks }}-->
             </span>
           </div>
         </div>
@@ -35,7 +35,7 @@
         <UDivider label="请填写报名信息" :ui="{ label: 'text-red-500' }" />
         <el-form ref="ruleFormRef" label-position="top" :model="ruleForm" :rules="rules" label-width="auto" size="large"
           status-icon :scroll-to-error="true">
-          <div class="flex gap-5 flex-col md:flex-row">
+          <div class="flex md:gap-5 flex-col md:flex-row">
             <el-form-item class="grow" label="姓名" prop="nickName">
               <el-input v-model="ruleForm.nickName" placeholder="请输入姓名" />
             </el-form-item>
@@ -43,9 +43,9 @@
               <el-input v-model="ruleForm.phoneNumber" placeholder="请输入手机号"></el-input>
             </el-form-item>
           </div>
-          <div class="flex gap-5 flex-col md:flex-row flex-wrap">
+          <div class="flex md:gap-5 flex-col md:flex-row flex-wrap">
 
-            <el-form-item class="grow shrink-0 w-[100px]" label="邮箱" prop="email">
+            <el-form-item class="grow shrink-0 md:w-[100px]" label="邮箱" prop="email">
               <el-input v-model="ruleForm.email" placeholder="请输入邮箱"></el-input>
             </el-form-item>
 
@@ -124,6 +124,9 @@
 
 <script setup>
 import { Minus, Plus } from "@element-plus/icons-vue";
+
+const tokenStore = useTokenStore();
+const {tokenValue} = storeToRefs(tokenStore);
 
 const userInfoStore = useUserInfoStore();
 const {userInfo} = storeToRefs(userInfoStore);
@@ -219,14 +222,13 @@ const resetForm = (formEl) => {
 };
 
 const handleFileChange = async (e, type) => {
-  const token = useCookie("token");
   const file = e.target.files[0];
   const formData = new FormData();
   formData.append("file", file);
   const result = await $fetch(`${apiBase}/common/upload`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token.value}`,
+      Authorization: `Bearer ${tokenValue.value}`,
     },
     body: formData,
   }).catch((err) => err.data);
@@ -245,12 +247,11 @@ const submitForm = async formEl => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
-      const token = useCookie("token");
       const result = await $fetch(`${apiBase}/system/signup`, {
         method: "POST",
         body: paramsInfo.value,
         headers: {
-          Authorization: `Bearer ${token.value}`,
+          Authorization: `Bearer ${tokenValue.value}`,
         },
       });
       const { code } = result || {};

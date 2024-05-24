@@ -1,7 +1,7 @@
 <template>
   <div class="divide-y">
     
-    <section class="text-gray-600 py-12">
+    <section class="text-gray-600 py-4">
       <div class="flex flex-wrap md:flex-nowrap gap-8">
         <div class="w-full md:w-3/5">
           <Banner></Banner>

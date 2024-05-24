@@ -1,10 +1,27 @@
 import { useLocalStorage } from "@vueuse/core";
 
-const {
-  public: { apiBase },
-} = useRuntimeConfig();
+const {public: { apiBase }} = useRuntimeConfig();
+
+export const useTokenStore = defineStore("tokenStore", () => {
+  const token = useCookie('ds_token', {
+    maxAge: 7 * 24 * 60 * 60 // 一周的秒数
+  });
+  const tokenValue = ref(token.value);
+  const setToken = (value) => {
+    token.value = value;
+    tokenValue.value = value;
+  };
+  return {
+    tokenValue,
+    setToken
+  };
+})
 
 export const useUserInfoStore = defineStore("userInfo", () => {
+  const tokenStore = useTokenStore();
+  const {setToken} = tokenStore;
+  const {tokenValue} = storeToRefs(tokenStore);
+
   const userData = useLocalStorage("user", "");
   const state = reactive({
     user: userData.value ? JSON.parse(userData.value) : "",
@@ -20,8 +37,6 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   });
   const captchaImageSrc = computed(() => captchaImageInfo.img)
   const uuid = computed(() => captchaImageInfo.uuid)
-  const token = useCookie('token');
-  token.value = token.value || '';
   const userInfo = ref(null);
   const getCaptchaImageInfo = async () => {
     const result = await $fetch(`${apiBase}/captchaImage`).catch((err) => {
@@ -38,30 +53,28 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     const result = await $fetch(`${apiBase}/logout`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token.value}`,
+        Authorization: `Bearer ${tokenValue.value}`,
       },
     }).catch(err => {
       console.log(err)
     });
     if(result.code === 200) {
-      token.value = '';
+      setToken('');
       userInfo.value = null;
       navigateTo("/");
     }
   }
   const loginAction = async (params) => {
-    debugger
     const result = await $fetch(`${apiBase}/login`, {
       method: 'POST', body: params || {}
     }).catch((err) => {
       console.log(err);
     });
-    const { code, msg, token: newToken } = result;
+    const { code, msg, token } = result;
     if (code === 200) {
-      token.value = newToken;
-      debugger
-      // refreshCookie("token");
-      await getLoginUserInfo();
+      setToken(token);
+      // refreshCookie("ds_token");
+      await getUserInfo();
       ElMessage({
         message: msg,
         type: "success",
@@ -83,7 +96,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     const result = await $fetch(`${apiBase}/getInfo`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token.value}`,
+        Authorization: `Bearer ${tokenValue.value}`,
       },
     }).catch((err) => {
       console.log(err);
@@ -94,35 +107,6 @@ export const useUserInfoStore = defineStore("userInfo", () => {
       userInfo.value = null;
     }
     return result;
-  }
-
-  const getLoginUserInfo = async () => {
-    debugger
-    const result = await getUserInfo();
-    debugger
-    if(result.code === 200) {
-      // 排除 admin sww
-      if(['admin', 'sww'].includes(result?.user?.username) || result?.user?.admin) {
-        return
-      }
-      await setUserRoles({...(result.user || {}), "roleIds": [100]});
-    }
-  }
-
-  const setUserRoles = async (params) => {
-    debugger
-    const result = await $fetch(`${apiBase}/system/user`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token.value}`,
-      },
-      body: params
-    }).catch((err) => {
-      console.log(err);
-    });
-    if(result.code === 200) {
-      getUserInfo();
-    }
   }
 
   const registerAction = async (params) => {
@@ -155,7 +139,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     user,
     setUserInfo,
     apiBase, captchaImageInfo, captchaImageSrc, uuid, userInfo,
-    getCaptchaImageInfo, loginAction, logoutAction, getUserInfo, setUserRoles, registerAction,
+    getCaptchaImageInfo, loginAction, logoutAction, getUserInfo, registerAction,
   };
 });
 
