@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: 'http://www.zgwtds.cn/app/v1'
+      apiBase: '//www.zgwtds.cn/app/v1'
     }
   },
   modules: [
