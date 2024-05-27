@@ -11,3 +11,13 @@ const appStoreInfo = useAppStoreInfo();
 const {detailInfo: content} = storeToRefs(appStoreInfo);
 appStoreInfo.getContestDetail({id: route.params.id});
 </script>
+<style lang="scss" scoped>
+:deep() {
+  p {
+    @apply my-4;
+    img {
+      @apply my-4 block mx-auto;
+    }
+  }
+}
+</style>

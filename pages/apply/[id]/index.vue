@@ -2,7 +2,7 @@
   <div class="container p-8 m-auto">
     <div class="flex gap-8 md:flex-row flex-col" v-if="detailInfo">
       <div class="md:w-2/5 w-full  text-gray-600 shrink-0">
-        <img class="w-full h-60 object-cover object-center rounded" :src="getStaticPath(detailInfo.thumbnail)"
+        <img class="w-full h-60 object-cover object-center rounded" :src="item.thumbnail"
           alt="thumbnail">
         <div class="py-6 px-3">
           <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{

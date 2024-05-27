@@ -9,7 +9,7 @@
       <div class="item-con">
         <div class="md:w-52 shrink-0">
           <div class="aspect-[2/1] mb-3 overflow-hidden relative">
-            <img class="rounded w-full h-full object-fill object-center bg-gray-200" :src="getStaticPath(item.thumbnail)" alt="content" />
+            <img class="rounded w-full h-full object-fill object-center bg-gray-200" :src="item.thumbnail" alt="content" />
             <div class="absolute top-0 right-0 text-white bg-red-500 rounded-l-full text-xs p-1 px-2 shadow">{{getCityIdToName(item.cityId)}}</div>
           </div>
           <div class="font-semibold text-gray-700">{{item.project.projectName}}</div>

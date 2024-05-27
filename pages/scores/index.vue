@@ -3,5 +3,14 @@
 </template>
 
 <script setup></script>
+<style lang="scss" scoped>
+:deep() {
+  p {
+    @apply my-4;
+    img {
+      @apply my-4 block mx-auto;
+    }
+  }
+}
+</style>
 
-<style lang="scss" scoped></style>

@@ -26,7 +26,7 @@ const imgsList = computed(() => {
       carousel: item.carousel || '',
       id: item.projectId,
       to: `/about/${item.projectId}`,
-      img: getStaticPath(item.thumbnail),
+      img: item.thumbnail,
       name: item.projectName
     }
   }), (contestList || []).map(item => {
@@ -34,7 +34,7 @@ const imgsList = computed(() => {
       carousel: item.carousel || '',
       id: item.contestId,
       to: `/join/${item.contestId}`,
-      img: getStaticPath(item.thumbnail),
+      img: item.thumbnail,
       name: item.name
     }
   }), (notificationList || []).map(item => {
@@ -42,7 +42,7 @@ const imgsList = computed(() => {
       carousel: item.carousel || '',
       id: item.notificationId,
       to: `/notice/${item.notificationId}`,
-      img: getStaticPath(item.thumbnail),
+      img: item.thumbnail,
       name: item.notificationName
     }
   }), (broadcastList || []).map(item => {
@@ -50,7 +50,7 @@ const imgsList = computed(() => {
       carousel: item.carousel || '',
       id: item.broadcastId,
       to: `/broadcast/${item.broadcastId}`,
-      img: getStaticPath(item.thumbnail),
+      img: item.thumbnail,
       name: item.broadcastName
     }
   })].flat().filter(item => item.carousel === 'Y')

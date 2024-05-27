@@ -11,18 +11,28 @@ export default defineNuxtConfig({
     devProxy: {
       // '/proxy/test': 'http://localhost:3001',
       // '/proxy/example': { target: 'https://example.com', changeOrigin: true },
-      "/v1-api": {
+      "/app/v1": {
         target: "https://www.zgwtds.cn/app/v1",
         changeOrigin: true,
         prependPath: true
       },
+      "/profile/upload": {
+        target: "https://www.zgwtds.cn/app/v1/profile/upload",
+        changeOrigin: true,
+        prependPath: true
+      },
+      // "/v1-api": {
+      //   target: "https://www.zgwtds.cn/app/v1",
+      //   changeOrigin: true,
+      //   prependPath: true
+      // },
     },
-    // 该配置用于服务端请求转发
-    routeRules: {
-      '/v1-api/**': {
-        proxy: 'https://www.zgwtds.cn/app/v1/**'
-      }
-    }
+    // // 该配置用于服务端请求转发
+    // routeRules: {
+    //   '/v1-api/**': {
+    //     proxy: 'https://www.zgwtds.cn/app/v1/**'
+    //   }
+    // }
   },
   ssr: false,
   // debug: !!isDev,
@@ -31,7 +41,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://www.zgwtds.cn/app/v1'
+      apiBase: 'https://www.zgwtds.cn/app/v1'
     }
   },
   modules: [

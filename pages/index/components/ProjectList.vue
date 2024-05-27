@@ -3,7 +3,7 @@
     <div class="p-4 md:w-1/3" v-for="item in projectList" :key="item.projectId">
       <div class="shadow-md ring-1 ring-inset ring-gray-200 rounded-lg overflow-hidden transition duration-150 ease-out hover:ease-in hover:shadow-2xl">
         <div class="w-full aspect-[2/1] overflow-hidden">
-          <img class="w-full h-full object-cover object-center transition duration-150 ease-out hover:ease-in hover:scale-110" :src="getStaticPath(item.thumbnail)" alt="image" />
+          <img class="w-full h-full object-cover object-center transition duration-150 ease-out hover:ease-in hover:scale-110" :src="item.thumbnail" alt="image" />
         </div>
         <div class="p-5">
           <h2 class="tracking-widest text-xs font-medium text-gray-400 mb-1">{{item.createTime}}&nbsp;</h2>

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full md:flex-1">
     <div class="aspect-[2/1] relative">
-      <img class="w-full h-full object-cover object-center rounded-lg" alt="hero" :src="getStaticPath(currentData.thumbnail)" />
+      <img class="w-full h-full object-cover object-center rounded-lg" alt="hero" :src="currentData.thumbnail" />
       <div class="absolute top-3 right-0 text-white bg-red-500 rounded-l-full text-xs p-1 px-2 shadow">{{getCityIdToName(currentData.cityId)}}</div>
     </div>
     <h1 class="pt-3 pb-1 font-medium text-red-600 truncate">{{currentData.name}}</h1>
