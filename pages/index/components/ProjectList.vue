@@ -8,7 +8,7 @@
         <div class="p-5">
           <h2 class="tracking-widest text-xs font-medium text-gray-400 mb-1">{{item.createTime}}&nbsp;</h2>
           <h1 class="text-lg font-medium text-gray-900 mb-3 text-red-600 text-justify">{{item.projectName}}</h1>
-          <p class="leading-relaxed mb-3 line-clamp-5 text-ellipsis text-justify">{{item.content}}</p>
+          <p class="leading-relaxed mb-3 line-clamp-5 text-ellipsis text-justify">{{replaceHtml(item.content)}}</p>
           <div>
             <UButton label="查看详情" @click="jumpTo(item.projectId)">
               <template #trailing>

@@ -15,7 +15,7 @@
             <UBadge size="xs" color="red" variant="soft">结束时间</UBadge>
             <div>{{item.endTime}}</div>
           </div>
-          <p class="leading-relaxed mb-3 line-clamp-2 text-ellipsis text-justify" v-html="item.content"></p>
+          <p class="leading-relaxed mb-3 line-clamp-2 text-ellipsis text-justify">{{replaceHtml(item.content)}}</p>
           <div>
             <UButton class="bg-gradient-to-r transition duration-3000 ease-out hover:from-red-500 hover:to-red-600 hover:text-white" color="gray" label="立即报名" @click="jumpTo(item.contestId)">
               <template #trailing>

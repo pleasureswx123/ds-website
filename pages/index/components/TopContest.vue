@@ -5,7 +5,7 @@
       <div class="absolute top-3 right-0 text-white bg-red-500 rounded-l-full text-xs p-1 px-2 shadow">{{getCityIdToName(currentData.cityId)}}</div>
     </div>
     <h1 class="pt-3 pb-1 font-medium text-red-600 truncate">{{currentData.name}}</h1>
-    <p class="leading-normal line-clamp-2 text-ellipsis text-justify">{{currentData.content}}</p>
+    <p class="leading-normal line-clamp-2 text-ellipsis text-justify">{{replaceHtml(currentData.content)}}</p>
     <div class="pt-3 flex gap-2 items-center">
       <UButton class="mr-auto" size="md" @click="navigateTo(`/apply/${currentData.contestId}`)">立即报名</UButton>
       <UBadge size="xs" color="red" variant="soft">开始时间</UBadge>

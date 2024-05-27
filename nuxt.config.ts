@@ -7,6 +7,23 @@ export default defineNuxtConfig({
   //   port: 3000,
   //   host: "localhost",
   // },
+  nitro: {
+    devProxy: {
+      // '/proxy/test': 'http://localhost:3001',
+      // '/proxy/example': { target: 'https://example.com', changeOrigin: true },
+      "/v1-api": {
+        target: "https://www.zgwtds.cn/app/v1",
+        changeOrigin: true,
+        prependPath: true
+      },
+    },
+    // 该配置用于服务端请求转发
+    routeRules: {
+      '/v1-api/**': {
+        proxy: 'https://www.zgwtds.cn/app/v1/**'
+      }
+    }
+  },
   ssr: false,
   // debug: !!isDev,
   experimental: {
@@ -14,7 +31,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: '//www.zgwtds.cn/app/v1'
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://www.zgwtds.cn/app/v1'
     }
   },
   modules: [

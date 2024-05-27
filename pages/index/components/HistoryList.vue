@@ -9,7 +9,7 @@
       <div class="item-con">
         <div class="md:w-52 shrink-0">
           <div class="aspect-[2/1] mb-3 overflow-hidden relative">
-            <img class="rounded w-full h-full object-cover object-center bg-gray-200" :src="getStaticPath(item.thumbnail)" alt="content" />
+            <img class="rounded w-full h-full object-fill object-center bg-gray-200" :src="getStaticPath(item.thumbnail)" alt="content" />
             <div class="absolute top-0 right-0 text-white bg-red-500 rounded-l-full text-xs p-1 px-2 shadow">{{getCityIdToName(item.cityId)}}</div>
           </div>
           <div class="font-semibold text-gray-700">{{item.project.projectName}}</div>
@@ -17,7 +17,7 @@
         </div>
         <div class="grow">
           <h2 class="text-2xl font-medium text-red-600 title-font mb-2">{{item.name}}</h2>
-          <p class="leading-relaxed line-clamp-3 text-ellipsis" v-html="item.content"></p>
+          <p class="leading-relaxed line-clamp-3 text-ellipsis">{{replaceHtml(item.content)}}</p>
           <a class="text-red-500 inline-flex items-center mt-4">查看详情
             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
                  stroke-linecap="round" stroke-linejoin="round">
