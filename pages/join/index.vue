@@ -5,7 +5,7 @@
       <div class="shadow ring-1 ring-gray-100 hover:shadow-lg rounded-lg relative pb-3" v-for="(item, index) in contestList" :key="index" @click="goDetail(item)">
         <el-image :src="item.thumbnail" fit="cover" class="cursor-pointer w-full aspect-[4/3] rounded-t-lg">
           <template #error>
-            <div class="w-full h-full flex items-center justify-center bg-gray-100" @click="goDetail(item)">
+            <div class="w-full h-full flex items-center justify-center bg-gray-100">
               <el-icon :size="80" color="#fff">
                 <Picture />
               </el-icon>
