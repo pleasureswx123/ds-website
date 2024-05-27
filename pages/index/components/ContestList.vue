@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap select-none">
-    <div class="p-4 md:w-1/4" v-for="item in contestList" :key="item.contestId">
+    <div class="p-4 md:w-1/4" v-for="item in listData" :key="item.contestId">
       <div class="shadow-md ring-1 ring-inset ring-gray-200 rounded-lg overflow-hidden transition duration-150 ease-out hover:ease-in hover:shadow-2xl">
         <div class="w-full aspect-[2/1] overflow-hidden relative">
           <img class="w-full h-full object-cover object-center transition duration-150 ease-out hover:ease-in hover:scale-110" :src="item.thumbnail" alt="image" />
@@ -34,6 +34,11 @@ const appStoreInfo = useAppStoreInfo();
 const { contestList } = storeToRefs(appStoreInfo);
 const {getContestList} = appStoreInfo;
 await getContestList();
+
+const listData = computed(() => {
+  return (contestList.value || []).slice(0, 8)
+})
+
 const jumpTo = id => {
   navigateTo(`/apply/${id}`)
 }

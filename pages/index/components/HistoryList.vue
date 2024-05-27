@@ -1,7 +1,7 @@
 <template>
   <div class="px-5">
     <h1 class="text-lg p-4 mb-10 border-b border-gray-300 font-medium text-gray-600 text-justify bg-red-600 text-white rounded-lg">历届赛事</h1>
-    <div class="item-box" v-for="item in contestList" :key="item.contestId" @click="jumpTo(item.contestId)">
+    <div class="item-box" v-for="item in listData" :key="item.contestId" @click="jumpTo(item.contestId)">
       <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
         <div class="w-5 h-5 rounded-full bg-red-500 inline-flex items-center justify-center text-white absolute left-2.5 top-0 z-10" />
@@ -36,6 +36,11 @@ const appStoreInfo = useAppStoreInfo();
 const { contestList } = storeToRefs(appStoreInfo);
 const {getContestList} = appStoreInfo;
 await getContestList();
+
+const listData = computed(() => {
+  return (contestList.value || []).slice(0, 6);
+})
+
 const jumpTo = id => {
   navigateTo(`/join/${id}`)
 }
