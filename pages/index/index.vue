@@ -11,7 +11,7 @@
     </section>
     
     <div>
-      <img class="w-full h-32 object-cover m-auto" src="~/assets/images/banner-1.png" alt="">
+      <img class="w-full max-h-32 object-contain  md:object-cover m-auto" src="~/assets/images/banner-1.png" alt="">
     </div>
   
     <BlockCard>
@@ -19,7 +19,7 @@
     </BlockCard>
   
     <div>
-      <img class="w-full h-32 object-cover object-center" src="~/assets/images/banner-3.png" alt="">
+      <img class="w-full max-h-32 object-contain  md:object-cover m-auto" src="~/assets/images/banner-3.png" alt="">
     </div>
     
     <BlockCard>

@@ -7,6 +7,6 @@ export default function replaceHtml(contentHtml) {
     htmlString = htmlString.replace(/<strong[^>]*>|<\/strong>/g, '')
     return htmlString;
   }
-  const res = removeImgAndPTags(contentHtml);
+  const res = contentHtml ? removeImgAndPTags(contentHtml) : '';
   return res.slice(0);
 }

@@ -32,7 +32,10 @@
 import { Picture } from "@element-plus/icons-vue";
 const appStoreInfo = useAppStoreInfo();
 const {projectList} = storeToRefs(appStoreInfo);
-appStoreInfo.getProjectList();
+const {getProjectList, getContestList, jumpPath} = appStoreInfo;
+
+await getProjectList();
+const contestList = ref([]);
 
 const projectListData = computed(() => {
   return (projectList.value || []).map(item => {
@@ -50,19 +53,19 @@ watch(projectList, (list) => {
 })
 watch(projectId, (id) => {
   console.log(876, id)
-  id && getContestList(id);
+  id && getContestListData(id);
 })
 
-const contestList = ref([]);
-
-const getContestList = async (projectId) => {
-  appStoreInfo.getContestList({projectId}).then(rows => {
-    contestList.value = rows;
+const getContestListData = async (projectId) => {
+  getContestList({projectId}).then(rows => {
+    debugger
+    console.log(987, rows)
+    contestList.value = rows || [];
   })
 }
 
 const goDetail = (item) => {
-  appStoreInfo.jumpPath(`/join/${item.contestId}`)
+  jumpPath(`/join/${item.contestId}`)
 }
 </script>
 

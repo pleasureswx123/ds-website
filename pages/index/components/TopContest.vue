@@ -23,7 +23,7 @@ const {getContestList} = appStoreInfo;
 await getContestList();
 
 const currentData = computed(() => {
-  return (contestList.value || []).find(item => item.recommend === 'Y')
+  return (contestList.value || []).find(item => item.recommend === 'Y') || {}
 })
 </script>
 
