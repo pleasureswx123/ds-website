@@ -9,7 +9,7 @@
             detailInfo.project.projectName }}
           </h2>
           <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ detailInfo.name }}</h1>
-          <p class="leading-relaxed mb-3 line-clamp-10 text-ellipsis text-justify">{{ replaceHtml(detailInfo.content) }}</p>
+          <p class="leading-relaxed mb-3 line-clamp-6 text-justify">{{ replaceHtml(detailInfo.content) }}</p>
           <div class="flex items-center flex-wrap ">
             <a class="text-red-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer" @click="handleJumpTo">查看详情
               <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"

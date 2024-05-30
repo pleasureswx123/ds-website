@@ -5,6 +5,8 @@ export default function replaceHtml(contentHtml) {
     htmlString = htmlString.replace(/<p[^>]*>|<\/p>/g, '');
     htmlString = htmlString.replace(/<span[^>]*>|<\/span>/g, '')
     htmlString = htmlString.replace(/<strong[^>]*>|<\/strong>/g, '')
+    htmlString = htmlString.replace(/<h[^>]*>|<\/h[^>]>/g, '')
+    htmlString = htmlString.replace(/&nbsp;/g, '')
     return htmlString;
   }
   const res = contentHtml ? removeImgAndPTags(contentHtml) : '';
