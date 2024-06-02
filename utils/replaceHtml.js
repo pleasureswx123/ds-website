@@ -1,14 +1,20 @@
-export default function replaceHtml(contentHtml) {
-  function removeImgAndPTags(htmlString) {
-    htmlString = htmlString.replace(/<img[^>]*>/g, '');
-    htmlString = htmlString.replace(/<div[^>]*>|<\/div>/g, '');
-    htmlString = htmlString.replace(/<p[^>]*>|<\/p>/g, '');
-    htmlString = htmlString.replace(/<span[^>]*>|<\/span>/g, '')
-    htmlString = htmlString.replace(/<strong[^>]*>|<\/strong>/g, '')
-    htmlString = htmlString.replace(/<h[^>]*>|<\/h[^>]>/g, '')
-    htmlString = htmlString.replace(/&nbsp;/g, '')
-    return htmlString;
+export default function replaceHtml(html) {
+  let result = html.replace(/<[^>]+>/g, "");
+  const map = {
+    "&nbsp;": " ",
+    "&lt;": "<",
+    "&gt;": ">",
+    "&amp;": "&",
+    "&quot;": '"',
+    "&apos;": "'",
+    "&cent;": "¢",
+    "&pound;": "£",
+    "&yen;": "¥",
+    "&euro;": "€",
+    "&copy;": "©",
+  };
+  for (const key in map) {
+    result = result.replace(new RegExp(key, "g"), map[key]);
   }
-  const res = contentHtml ? removeImgAndPTags(contentHtml) : '';
-  return res.slice(0);
+  return result;
 }
