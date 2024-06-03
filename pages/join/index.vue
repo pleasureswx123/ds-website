@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col md:flex-row gap-4">
+  <div class="flex flex-col md:flex-row gap-5">
     <Sidebar class="md:w-1/4 shrink-0" v-model="projectId" title="赛事项目" :list="projectListData"></Sidebar>
     <div class="grow">
-      <div v-if="!!list.length" class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div v-if="!!list.length" class="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         <div class="shadow ring-1 ring-gray-100 hover:shadow-lg rounded-lg relative pb-3" v-for="(item, index) in list" :key="index" @click="goDetail(item)">
           <el-image :src="item.thumbnail" fit="cover" class="cursor-pointer w-full aspect-[4/3] rounded-t-lg">
             <template #error>

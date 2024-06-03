@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col md:flex-row gap-6">
+  <div class="flex flex-col md:flex-row gap-5">
     <Sidebar class="md:w-1/4 shrink-0" v-model="projectId" title="通知公告" :list="projectListData"></Sidebar>
     <div class="grow">
       <div v-if="!!list.length" class="divide-y divide-gray-200 divide-dashed">
-        <div class="p-2 py-5 flex gap-4 items-center cursor-pointer hover:bg-gray-50 group"
+        <div class="p-2 py-4 flex gap-4 items-center cursor-pointer hover:bg-gray-50 group"
              v-for="(item, index) in list" :key="index" @click="goDetail(item)">
           <div class="grow w-0 group-hover:text-red-600 cursor-pointer truncate">
             {{ item.notificationName }}

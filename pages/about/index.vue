@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-wrap select-none">
+  <div class="flex flex-wrap select-none -mx-2.5 !-mb-5">
     <template v-if="!!projectList.length">
-      <div class="p-4 md:w-1/3 hover:cursor-pointer" v-for="item in projectList" :key="item.projectId"  @click="goDetail(item)">
+      <div class="px-2.5 mb-5 md:w-1/3 hover:cursor-pointer" v-for="item in projectList" :key="item.projectId"  @click="goDetail(item)">
         <div class="shadow-md ring-1 ring-inset ring-gray-200 rounded-lg overflow-hidden transition duration-150 ease-out hover:ease-in hover:shadow-2xl">
           <div class="w-full aspect-[2/1] overflow-hidden">
             <img class="w-full h-full object-cover object-center transition duration-150 ease-out hover:ease-in hover:scale-110" :src="item.thumbnail" alt="image" />

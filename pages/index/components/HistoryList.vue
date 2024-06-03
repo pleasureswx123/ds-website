@@ -1,6 +1,6 @@
 <template>
-  <div class="px-5">
-    <h1 class="text-lg p-4 mb-10 border-b border-gray-300 font-medium text-gray-600 text-justify bg-red-600 text-white rounded-lg">历届赛事</h1>
+  <div class="text-gray-600">
+    <h1 class="text-lg px-4 py-2 mb-5 border-b border-gray-300 font-medium text-gray-600 text-justify bg-red-600 text-white rounded-lg">历届赛事</h1>
     <div class="item-box" v-for="item in listData" :key="item.contestId" @click="jumpTo(item.contestId)">
       <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
@@ -48,7 +48,7 @@ const jumpTo = id => {
 
 <style lang="scss" scoped>
 .item-box {
-  @apply relative pb-12 pl-14 last:pb-0;
+  @apply relative pb-6 pl-14 last:pb-0;
   &:last-child > :first-child > :first-child {
     @apply hidden;
   }
