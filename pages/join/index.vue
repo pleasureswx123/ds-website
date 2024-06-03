@@ -2,8 +2,8 @@
   <div class="flex flex-col md:flex-row gap-4">
     <Sidebar class="md:w-1/4 shrink-0" v-model="projectId" title="赛事项目" :list="projectListData"></Sidebar>
     <div class="grow">
-      <div v-if="!!contestList.length" class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-        <div class="shadow ring-1 ring-gray-100 hover:shadow-lg rounded-lg relative pb-3" v-for="(item, index) in contestList" :key="index" @click="goDetail(item)">
+      <div v-if="!!list.length" class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <div class="shadow ring-1 ring-gray-100 hover:shadow-lg rounded-lg relative pb-3" v-for="(item, index) in list" :key="index" @click="goDetail(item)">
           <el-image :src="item.thumbnail" fit="cover" class="cursor-pointer w-full aspect-[4/3] rounded-t-lg">
             <template #error>
               <div class="w-full h-full flex items-center justify-center bg-gray-100">
@@ -46,7 +46,7 @@ const {getProjectList, getContestList, jumpPath, initPageParams} = appStoreInfo;
 initPageParams();
 
 await getProjectList();
-const contestList = ref([]);
+const list = ref([]);
 
 const projectListData = computed(() => {
   return (projectList.value || []).map(item => {
@@ -66,17 +66,17 @@ watch(projectList, (list) => {
 
 watch(projectId, (id) => {
   initPageParams();
-  id && getContestListData(id);
+  id && getList(id);
 })
 
 const handleCurrentChange = (page) => {
   currentPage.value = page;
-  getContestListData(projectId.value);
+  getList(projectId.value);
 }
 
-const getContestListData = async (projectId) => {
+const getList = async (projectId) => {
   getContestList({projectId, pageNum: currentPage.value, pageSize: pageSize.value}).then(rows => {
-    contestList.value = rows || [];
+    list.value = rows || [];
   })
 }
 

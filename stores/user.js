@@ -167,6 +167,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
   const getNotificationList = async (params) => {
     const result = await fetchApi.getNotificationList(params);
     if (result.code === 200) {
+      pageTotal.value = result?.total || 0;
       return result?.rows;
     }
   }
