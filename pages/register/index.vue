@@ -5,7 +5,7 @@
         label-width="auto" class="demo-ruleForm" size="large" require-asterisk-position="left"
         :hide-required-asterisk="true" :scroll-to-error="true">
         <el-form-item prop="username">
-          <el-input v-model="params.username" placeholder="账号">
+          <el-input v-model="params.username" placeholder="手机号">
             <template #prefix>
               <Icon name="fluent:person-circle-20-filled" color="#a2a2a2" size="25" />
             </template>
@@ -84,6 +84,15 @@ const registerParams = computed(() => {
   return {...params, uuid: uuid.value}
 })
 
+const validatePhone = (rule, value, callback) => {
+  if (value === "") {
+    callback(new Error("请输入手机号"));
+  } else if (!/^1[3-9]\d{9}$/.test(value)) {
+    callback(new Error("请输入正确的手机号"));
+  } else {
+    callback();
+  }
+};
 const validatePass = (rule, value, callback) => {
   if (value === "") {
     callback(new Error("请输入密码"));
@@ -107,21 +116,9 @@ const validatePass2 = (rule, value, callback) => {
   }
 };
 const rules = reactive({
-  username: [{ required: true, message: "请输入姓名", trigger: "blur" }],
-  password: [
-    {
-      required: true,
-      validator: validatePass,
-      trigger: ["blur", "change"],
-    },
-  ],
-  confirmPassword: [
-    {
-      required: true,
-      validator: validatePass2,
-      trigger: ["blur"],
-    },
-  ],
+  username: [{ required: true, validator: validatePhone, message: "请输入手机号", trigger: "blur" }],
+  password: [{required: true, validator: validatePass, trigger: "blur"}],
+  confirmPassword: [{required: true, validator: validatePass2, trigger: "blur"}],
   code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
 });
 

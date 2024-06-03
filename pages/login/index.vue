@@ -5,7 +5,7 @@
         label-width="auto" class="demo-ruleForm" size="large" require-asterisk-position="left"
         :hide-required-asterisk="true" :scroll-to-error="true">
         <el-form-item prop="username">
-          <el-input v-model="params.username" placeholder="账号">
+          <el-input v-model="params.username" placeholder="手机号">
             <template #prefix>
               <Icon name="fluent:person-circle-20-filled" color="#a2a2a2" size="25" />
             </template>
@@ -62,7 +62,7 @@ const params = reactive({
   code: ""
 });
 const rules = reactive({
-  username: [{ required: true, message: "请输入姓名", trigger: "blur" }],
+  username: [{ required: true, message: "请输入手机号", trigger: "blur" }],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }],
   code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
 });
