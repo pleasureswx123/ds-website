@@ -130,10 +130,10 @@ const {tokenValue} = storeToRefs(tokenStore);
 
 const userInfoStore = useUserInfoStore();
 const {userInfo} = storeToRefs(userInfoStore);
-await userInfoStore.getUserInfo().then(res => {
-  if(res.code !== 200) {
-    navigateTo("/login");
-  }
+
+await userInfoStore.getUserInfo().catch(() => {
+  navigateTo("/login");
+  return false
 });
 
 const route = useRoute();
