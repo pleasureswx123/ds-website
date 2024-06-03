@@ -126,7 +126,14 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
   const projectList = ref([]);
   const contestList = ref([]);
   const detailInfo = ref(null);
+  const currentPage = ref(1);
+  const pageSize = ref(10);
+  const pageTotal = ref(0);
   const router = useRouter();
+  const initPageParams = () => {
+    currentPage.value = 1;
+    pageTotal.value = 0;
+  }
   const getProjectList = async (params) => {
     const result = await fetchApi.getProjectList(params);
     if (result.code === 200) {
@@ -146,6 +153,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     if (result.code === 200) {
       const resData = result?.rows || [];
       contestList.value = resData;
+      pageTotal.value = result?.total || 0;
       return resData;
     }
   }
@@ -186,7 +194,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     path && router.push(path);
   }
   return {
-    jumpPath, apiBase, projectList, contestList, detailInfo,
+    jumpPath, apiBase, projectList, contestList, detailInfo, pageTotal, currentPage, pageSize, initPageParams,
     getProjectList, getContestList, getNotificationList, getBroadcastList,
     getProjectDetail, getContestDetail, getNotificationDetail, getBroadcastDetail,
   }
