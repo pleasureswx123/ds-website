@@ -28,7 +28,6 @@
 </template>
 
 <script setup>
-// import {Picture} from "@element-plus/icons-vue";
 const appStoreInfo = useAppStoreInfo();
 const {projectList} = storeToRefs(appStoreInfo);
 appStoreInfo.getProjectList();
