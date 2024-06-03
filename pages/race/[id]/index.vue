@@ -4,7 +4,7 @@
 
 <script setup>
 definePageMeta({
-    layout: 'race'
+    layout: 'feature'
 });
 </script>
 <style lang="scss" scoped>
