@@ -1,3 +1,4 @@
+import fetchApi from '~/api';
 import { useLocalStorage } from "@vueuse/core";
 
 const {public: { apiBase }} = useRuntimeConfig();
@@ -39,9 +40,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   const uuid = computed(() => captchaImageInfo.uuid)
   const userInfo = ref(null);
   const getCaptchaImageInfo = async () => {
-    const result = await $fetch(`${apiBase}/captchaImage`).catch((err) => {
-      console.log(err);
-    });
+    const result = await fetchApi.getCaptchaImageInfo();
     if (result.code === 200) {
       const {img, uuid} = result || {};
       captchaImageInfo.img = `data:image/gif;base64,${img}`;
@@ -50,14 +49,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     }
   }
   const logoutAction = async () => {
-    const result = await $fetch(`${apiBase}/logout`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${tokenValue.value}`,
-      },
-    }).catch(err => {
-      console.log(err)
-    });
+    const result = await fetchApi.logoutAction()
     if(result.code === 200) {
       setToken('');
       userInfo.value = null;
@@ -65,11 +57,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
     }
   }
   const loginAction = async (params) => {
-    const result = await $fetch(`${apiBase}/login`, {
-      method: 'POST', body: params || {}
-    }).catch((err) => {
-      console.log(err);
-    });
+    const result = await fetchApi.loginAction(params);
     const { code, msg, token } = result;
     if (code === 200) {
       setToken(token);
@@ -93,14 +81,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   }
 
   const getUserInfo = async () => {
-    const result = await $fetch(`${apiBase}/getInfo`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${tokenValue.value}`,
-      },
-    }).catch((err) => {
-      console.log(err);
-    });
+    const result = await fetchApi.getUserInfo();
     if(result.code === 200) {
       userInfo.value = result?.user || {};
     } else {
@@ -110,9 +91,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
   }
 
   const registerAction = async (params) => {
-    const result = await $fetch(`${apiBase}/register`, {
-      method: "POST", body: params
-    });
+    const result = await fetchApi.registerAction(params);
     const { code, msg } = result;
     if (code === 200) {
       ElMessageBox.confirm("恭喜注册成功！", "提示", {
@@ -148,28 +127,22 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
   const contestList = ref([]);
   const detailInfo = ref(null);
   const router = useRouter();
-  const getProjectList = async ({ pageNum = 1, pageSize = 10 } = {}) => {
-    const result = await $fetch(`${apiBase}/system/project/list?pageNum=${pageNum}&pageSize=${pageSize}`).catch((err) => {
-      console.log(err);
-    });
+  const getProjectList = async (params) => {
+    const result = await fetchApi.getProjectList(params);
     if (result.code === 200) {
       projectList.value = result?.rows;
       return result?.rows;
     }
   }
   const getProjectDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${apiBase}/system/project/${id}`).catch((err) => {
-      console.log(err);
-    });
+    const result = await fetchApi.getProjectDetail(id);
     if (result.code === 200) {
       detailInfo.value = result?.data;
       return result?.data;
     }
   }
-  const getContestList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
-    const result = await $fetch(`${apiBase}/system/contest/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
-      console.log(err);
-    });
+  const getContestList = async (params) => {
+    const result = await fetchApi.getContestList(params);
     if (result.code === 200) {
       const resData = result?.rows || [];
       contestList.value = resData;
@@ -177,43 +150,33 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
     }
   }
   const getContestDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${apiBase}/system/contest/${id}`).catch((err) => {
-      console.log(err);
-    });
+    const result = await fetchApi.getContestDetail(id);
     if (result.code === 200) {
       detailInfo.value = result?.data;
       return result?.data;
     }
   }
-  const getNotificationList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
-    const result = await $fetch(`${apiBase}/system/notification/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
-      console.log(err);
-    });
+  const getNotificationList = async (params) => {
+    const result = await fetchApi.getNotificationList(params);
     if (result.code === 200) {
       return result?.rows;
     }
   }
   const getNotificationDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${apiBase}/system/notification/${id}`).catch((err) => {
-      console.log(err);
-    });
+    const result = await fetchApi.getNotificationDetail(id);
     if (result.code === 200) {
       detailInfo.value = result?.data;
       return result?.data;
     }
   }
-  const getBroadcastList = async ({ pageNum = 1, pageSize = 10, projectId = '' } = {}) => {
-    const result = await $fetch(`${apiBase}/system/broadcast/list?pageNum=${pageNum}&pageSize=${pageSize}&projectId=${projectId}`).catch((err) => {
-      console.log(err);
-    });
+  const getBroadcastList = async (params) => {
+    const result = await fetchApi.getBroadcastList(params);
     if (result.code === 200) {
       return result?.rows;
     }
   }
   const getBroadcastDetail = async ({ id } = {}) => {
-    const result = await $fetch(`${apiBase}/system/broadcast/${id}`).catch((err) => {
-      console.log(err);
-    });
+    const result = await fetchApi.getBroadcastDetail(id);
     if (result.code === 200) {
       detailInfo.value = result?.data;
       return result?.data;
