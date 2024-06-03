@@ -32,7 +32,7 @@ const {getProjectList, getNotificationList, jumpPath, initPageParams} = appStore
 
 initPageParams();
 
-await getProjectList();
+getProjectList();
 const list = ref([]);
 
 const projectListData = computed(() => {

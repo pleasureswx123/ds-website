@@ -181,6 +181,7 @@ export const useAppStoreInfo = defineStore("appStoreInfo", () => {
   const getBroadcastList = async (params) => {
     const result = await fetchApi.getBroadcastList(params);
     if (result.code === 200) {
+      pageTotal.value = result?.total || 0;
       return result?.rows;
     }
   }

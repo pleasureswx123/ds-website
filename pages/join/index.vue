@@ -45,7 +45,7 @@ const {getProjectList, getContestList, jumpPath, initPageParams} = appStoreInfo;
 
 initPageParams();
 
-await getProjectList();
+getProjectList();
 const list = ref([]);
 
 const projectListData = computed(() => {
